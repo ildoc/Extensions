@@ -1,0 +1,6 @@
+C:\Projects\Extensions\Extensions\bin\Debug\netcoreapp2.2\Extensions.deps.json
+C:\Projects\Extensions\Extensions\bin\Debug\netcoreapp2.2\Extensions.dll
+C:\Projects\Extensions\Extensions\obj\Debug\netcoreapp2.2\Extensions.csprojAssemblyReference.cache
+C:\Projects\Extensions\Extensions\obj\Debug\netcoreapp2.2\Extensions.csproj.CoreCompileInputs.cache
+C:\Projects\Extensions\Extensions\obj\Debug\netcoreapp2.2\Extensions.AssemblyInfoInputs.cache
+C:\Projects\Extensions\Extensions\obj\Debug\netcoreapp2.2\Extensions.AssemblyInfo.cs
