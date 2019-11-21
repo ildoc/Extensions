@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Extensions.Utils
+namespace Utils
 {
     public static class For
     {
@@ -22,6 +22,16 @@ namespace Extensions.Utils
         {
             foreach (var item in source)
                 action((T)item);
+        }
+
+        /// <summary>
+        ///     For shortcut with index, no side effects
+        /// </summary>
+        [DebuggerStepThrough]
+        public static void EachIndex<T>(IEnumerable<T> source, Action<T, int> action)
+        {
+            var i = 0;
+            Each(source, item => action(item, i++));
         }
     }
 }
