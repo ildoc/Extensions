@@ -58,12 +58,12 @@ namespace Extensions
             newValue.IsNullOrEmpty() ? value : newValue;
 
         public static bool IsNullOrEmpty(this string value) =>
-            value == null || value == string.Empty;
+            value == null || value?.Length == 0;
 
         public static bool IsNullOrWhiteSpace(this string value) =>
             value == null || value.Trim().Length == 0;
 
-        public static bool IsNumeric(this string value) => long.TryParse(value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out var retNum);
+        public static bool IsNumeric(this string value) => long.TryParse(value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out _);
 
         public static IEnumerable<string> SplitString(this string s) =>
             s.ToCharArray().Select(x => x.ToString());
@@ -106,9 +106,9 @@ namespace Extensions
         public static IEnumerable<string> SplitLines(this string s)
         {
             string line;
-            using (var sr = new StringReader(s))
-                while ((line = sr.ReadLine()) != null)
-                    yield return line;
+            using var sr = new StringReader(s);
+            while ((line = sr.ReadLine()) != null)
+                yield return line;
         }
 
         public static string TransformTemplate(this string template, object data)

@@ -12,11 +12,12 @@ namespace Extensions
             while (n > 1)
             {
                 var box = new byte[1];
-                do provider.GetBytes(box);
+                do
+                    provider.GetBytes(box);
                 while (!(box[0] < n * (byte.MaxValue / n)));
                 var k = (box[0] % n);
                 n--;
-                T value = list[k];
+                var value = list[k];
                 list[k] = list[n];
                 list[n] = value;
             }

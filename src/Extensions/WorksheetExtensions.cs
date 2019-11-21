@@ -65,6 +65,5 @@ namespace Extensions
 
             return float.Parse(value.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
         }
-
     }
 }
