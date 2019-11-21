@@ -142,6 +142,11 @@ csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = false
 
 ## Naming conventions
+
+
+# RCS1194: Implement exception constructors.
+dotnet_diagnostic.RCS1194.severity = suggestion
+
 [*.{cs,vb}]
 
 ## Naming styles
@@ -160,6 +165,17 @@ dotnet_naming_style.type_parameter_style.required_prefix = T
 # camelCase with _ prefix
 dotnet_naming_style._camelCase.capitalization = camel_case
 dotnet_naming_style._camelCase.required_prefix = _
+
+
+# Instance fields are camelCase and start with _
+dotnet_naming_rule.instance_fields_should_be_camel_case.severity = suggestion
+dotnet_naming_rule.instance_fields_should_be_camel_case.symbols = instance_fields
+dotnet_naming_rule.instance_fields_should_be_camel_case.style = instance_field_style
+
+dotnet_naming_symbols.instance_fields.applicable_kinds = field
+
+dotnet_naming_style.instance_field_style.capitalization = camel_case
+dotnet_naming_style.instance_field_style.required_prefix = _
 
 ## Rules
 # Interfaces

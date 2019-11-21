@@ -14,8 +14,10 @@ namespace Utils
         public static RunResult RunWaiting(string fileName, string arguments = null, string workingDirectory = "")
         {
             var res = new RunResult();
-            var p = new System.Diagnostics.Process {
-                StartInfo = new System.Diagnostics.ProcessStartInfo {
+            var p = new System.Diagnostics.Process
+            {
+                StartInfo = new System.Diagnostics.ProcessStartInfo
+                {
                     WorkingDirectory = workingDirectory,
                     FileName = System.IO.Path.Combine(workingDirectory, fileName),
                     Arguments = arguments,

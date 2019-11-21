@@ -24,7 +24,7 @@ namespace Utils
                 action((T)item);
         }
 
-        /// <summary>
+        /// <summary> 
         ///     For shortcut with index, no side effects
         /// </summary>
         [DebuggerStepThrough]
