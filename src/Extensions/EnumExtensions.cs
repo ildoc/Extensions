@@ -6,7 +6,7 @@ namespace Extensions
     {
         public static T TryParse<T>(this Enum e, string s) where T : Enum
         {
-            Enum.TryParse(e.GetType(), s, out object result);
+            Enum.TryParse(e.GetType(), s, out var result);
             return (T)result;
         }
     }
