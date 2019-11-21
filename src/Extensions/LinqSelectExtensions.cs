@@ -8,7 +8,7 @@ namespace Extensions
     {
         public static IEnumerable<SelectTryResult<TSource, TResult>> SelectTry<TSource, TResult>(this IEnumerable<TSource> enumerable, Func<TSource, TResult> selector)
         {
-            foreach (var element in enumerable)
+            foreach (TSource element in enumerable)
             {
                 SelectTryResult<TSource, TResult> returnedValue;
                 try
@@ -17,7 +17,7 @@ namespace Extensions
                 }
                 catch (Exception ex)
                 {
-                    returnedValue = new SelectTryResult<TSource, TResult>(element, default, ex);
+                    returnedValue = new SelectTryResult<TSource, TResult>(element, default(TResult), ex);
                 }
                 yield return returnedValue;
             }
@@ -42,9 +42,9 @@ namespace Extensions
                 CaughtException = exception;
             }
 
-            public TSource Source { get; }
-            public TResult Result { get; }
-            public Exception CaughtException { get; }
+            public TSource Source { get; private set; }
+            public TResult Result { get; private set; }
+            public Exception CaughtException { get; private set; }
         }
     }
 }

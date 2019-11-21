@@ -1,4 +1,4 @@
-﻿namespace Extensions.Enums
+﻿namespace Utils.Enums
 {
     public enum KeyEncoding
     {
