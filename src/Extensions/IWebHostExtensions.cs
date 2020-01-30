@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
+using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -73,7 +75,6 @@ namespace Extensions
         private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext context, IServiceProvider services)
             where TContext : DbContext
         {
-            context.Database.EnsureCreated();
             context.Database.Migrate();
             seeder(context, services);
         }

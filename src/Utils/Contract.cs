@@ -12,7 +12,7 @@ namespace Utils
         {
             var typeName = t?.Name ?? "";
             var fileName = string.IsNullOrEmpty(filePath) ? "" : Path.GetFileName(filePath);
-            if (arg == null || (arg is string strArgs && string.IsNullOrEmpty(strArgs)))
+            if (arg == default)
             {
                 throw new ArgumentNullException($"{typeName} {varName}", $"{callerName}({typeName} {varName}) - {fileName}:{callerLineNumber} can't be null");
             }
@@ -74,7 +74,7 @@ namespace Utils
         public static RequireContract<T> NotNull<T>(this T obj, string name = null)
         {
             var r = new RequireContract<T>(obj, name);
-            r.Conditions.Add(new RequireCondition<T>(o => o != default, $"{name} is null", typeof(ArgumentNullException)));
+            r.Conditions.Add(new RequireCondition<T>(o => !EqualityComparer<T>.Default.Equals(o, default), $"{name} is null", typeof(ArgumentNullException)));
             return r;
         }
 
