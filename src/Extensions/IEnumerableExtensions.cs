@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Utils;
 
 namespace Extensions
@@ -13,5 +14,8 @@ namespace Extensions
 
         public static string Join(this IEnumerable source, char separator) => string.Join(separator, source);
         public static string Join(this IEnumerable source, string separator) => string.Join(separator, source);
+
+        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> enumerable, bool condition, Func<T, bool> f) =>
+           condition ? enumerable.Where(f) : enumerable;
     }
 }
