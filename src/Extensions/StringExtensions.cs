@@ -30,10 +30,19 @@ namespace Extensions
             => string.Equals(str, strToCompare, caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
 
         public static string Absolutize(this string path)
-            => IsPathRooted(path) ? path : Combine(Directory.GetCurrentDirectory(), path);
+        {
+            if (path == default)
+                throw new ArgumentException("Cannot absolutize a null path");
+            return IsPathRooted(path) ? path : Combine(Directory.GetCurrentDirectory(), path);
+        }
 
         public static string Slice(this string source, int start, int end)
         {
+            if (source == default)
+                throw new ArgumentException("Cannot slice a null string");
+            if (start < 0)
+                throw new ArgumentException("Slice cannot have a negative start");
+
             if (end < 0) // Keep this for negative end support
                 end = source.Length + end;
             var len = end - start; // Calculate length
@@ -42,6 +51,9 @@ namespace Extensions
 
         public static string FromCamelCase(this string source)
         {
+            if (source == default)
+                throw new ArgumentException("Cannot perform FromCamelCase on a null string");
+
             var returnValue = source;
 
             //Strip leading "_" character
@@ -58,15 +70,21 @@ namespace Extensions
             newValue.IsNullOrEmpty() ? value : newValue;
 
         public static bool IsNullOrEmpty(this string value) =>
-            value == null || value?.Length == 0;
+            value == default || value?.Length == 0;
 
         public static bool IsNullOrWhiteSpace(this string value) =>
-            value == null || value.Trim().Length == 0;
+            value == default || value.Trim().Length == 0;
 
-        public static bool IsNumeric(this string value) => long.TryParse(value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out _);
+        public static bool IsNumeric(this string value) =>
+            long.TryParse(value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out _);
 
-        public static IEnumerable<string> SplitString(this string s) =>
-            s.ToCharArray().Select(x => x.ToString());
+        public static IEnumerable<string> SplitString(this string source)
+        {
+            if (source == default)
+                throw new ArgumentException("Cannot split a null string");
+
+            return source.ToCharArray().Select(x => x.ToString());
+        }
 
         public static string CenterString(this string stringToCenter, int totalLength, char paddingChar) => stringToCenter
             .PadLeft(((totalLength - stringToCenter.Length) / 2) + stringToCenter.Length, paddingChar)
@@ -77,28 +95,22 @@ namespace Extensions
 
         public static byte[] ToBytes(this string input, KeyEncoding keyEncoding = KeyEncoding.UTF8)
         {
-            switch (keyEncoding)
+            return keyEncoding switch
             {
-                case KeyEncoding.ASCII:
-                    return Encoding.ASCII.GetBytes(input);
-                case KeyEncoding.Base64:
-                    return Convert.FromBase64String(input);
-                default:
-                    return Encoding.UTF8.GetBytes(input);
-            }
+                KeyEncoding.ASCII => Encoding.ASCII.GetBytes(input),
+                KeyEncoding.Base64 => Convert.FromBase64String(input),
+                _ => Encoding.UTF8.GetBytes(input),
+            };
         }
 
         public static string ToString(this byte[] input, KeyEncoding keyEncoding = KeyEncoding.UTF8)
         {
-            switch (keyEncoding)
+            return keyEncoding switch
             {
-                case KeyEncoding.ASCII:
-                    return Encoding.ASCII.GetString(input);
-                case KeyEncoding.Base64:
-                    return Convert.ToBase64String(input);
-                default:
-                    return Encoding.UTF8.GetString(input);
-            }
+                KeyEncoding.ASCII => Encoding.ASCII.GetString(input),
+                KeyEncoding.Base64 => Convert.ToBase64String(input),
+                _ => Encoding.UTF8.GetString(input),
+            };
         }
 
         public static string NewLine(this string str) => str + "\n";
