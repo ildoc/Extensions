@@ -14,7 +14,7 @@ namespace Extensions.Tests
 
         [Theory]
         [InlineData(0, false)]
-        [InlineData(null, false)]
+        [InlineData(default, false)]
         [InlineData(7, true)]
         [InlineData(-7, true)]
         public void IntShouldResolveAsBool(int? value, bool expectedValue)
@@ -24,7 +24,7 @@ namespace Extensions.Tests
 
         [Theory]
         [InlineData("false", false)]
-        [InlineData(null, false)]
+        [InlineData(default, false)]
         [InlineData("true", true)]
         [InlineData("asd", false)]
         public void StringShouldResolveAsBool(string value, bool expectedValue)
@@ -34,7 +34,7 @@ namespace Extensions.Tests
 
         [Theory]
         [InlineData(0, false)]
-        [InlineData(null, false)]
+        [InlineData(default, false)]
         [InlineData(7f, true)]
         [InlineData(-7f, true)]
         public void FloatShouldResolveAsBool(float? value, bool expectedValue)
@@ -44,7 +44,7 @@ namespace Extensions.Tests
 
         [Theory]
         [InlineData(0, false)]
-        [InlineData(null, false)]
+        [InlineData(default, false)]
         [InlineData(7.0, true)]
         [InlineData(-7.0, true)]
         public void DoubleShouldResolveAsBool(double? value, bool expectedValue)
