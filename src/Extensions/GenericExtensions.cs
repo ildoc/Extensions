@@ -7,8 +7,8 @@ namespace Extensions
 {
     public static class GenericExtensions
     {
-        public static bool IsIn<T>(this T value, T[] stringValues) => stringValues.Contains(value);
-        public static bool IsIn<T>(this T value, IEnumerable<T> stringValues) => value.IsIn(stringValues.ToArray());
+        public static bool IsIn<T>(this T value, T[] values) => values.Contains(value);
+        public static bool IsIn<T>(this T value, IEnumerable<T> values) => value.IsIn(values.ToArray());
         public static bool IsNotIn<T>(this T value, T[] stringValues) => !value.IsIn(stringValues);
         public static bool IsNotIn<T>(this T value, IEnumerable<T> stringValues) => !value.IsIn(stringValues);
         public static bool IsNull<T>(this T value) => EqualityComparer<T>.Default.Equals(value, default);
