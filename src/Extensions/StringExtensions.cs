@@ -141,5 +141,22 @@ namespace Extensions
             var chars = text.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray();
             return new string(chars).Normalize(NormalizationForm.FormC);
         }
+
+        public static string TolerantSubstring(this string text, int startIndex) =>
+            text.TolerantSubstring(startIndex, (text?.Length ?? 0) - startIndex);
+
+        public static string TolerantSubstring(this string text, int startIndex, int length)
+        {
+            if (text == default)
+                return default;
+
+            if (startIndex > text.Length)
+                return text;
+
+            if (length > text.Substring(startIndex).Length)
+                return text.Substring(startIndex);
+
+            return text.Substring(startIndex, length);
+        }
     }
 }

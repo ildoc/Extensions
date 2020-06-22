@@ -195,5 +195,41 @@ namespace Extensions.Tests
             var message = Assert.Throws<ArgumentException>(() => test.SplitString()).Message;
             Assert.Equal("Cannot split a null string", message);
         }
+
+        [Theory]
+        [InlineData(default, 1, default)]
+        [InlineData("string", 0, "string")]
+        [InlineData("string", 2, "ring")]
+        [InlineData("string", 15, "string")]
+        public void ShouldThrowNoErrorsOnTolerantSubstring(string value, int startIndex, string expected)
+        {
+            Assert.Equal(expected, value.TolerantSubstring(startIndex));
+        }
+
+        [Theory]
+        [InlineData(default, 1, 3, default)]
+        [InlineData("string", 0, 2, "st")]
+        [InlineData("string", 2, 0, "")]
+        [InlineData("string", 2, 2, "ri")]
+        [InlineData("string", 15, 23, "string")]
+        [InlineData("string", 2, 15, "ring")]
+        public void ShouldThrowNoErrorsOnTolerantSubstringWithLength(string value, int startIndex, int length, string expected)
+        {
+            Assert.Equal(expected, value.TolerantSubstring(startIndex, length));
+        }
+
+        [Fact]
+        public void TolerantSubstringShouldThrowExceptionIfIndexIsNegative()
+        {
+            var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(-3)).Message;
+            Assert.Equal("StartIndex cannot be less than zero. (Parameter 'startIndex')", message);
+        }
+
+        [Fact]
+        public void TolerantSubstringShouldThrowExceptionIfLengthIsNegative()
+        {
+            var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(0, -3)).Message;
+            Assert.Equal("Length cannot be less than zero. (Parameter 'length')", message);
+        }
     }
 }
