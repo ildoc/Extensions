@@ -231,5 +231,13 @@ namespace Extensions.Tests
             var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(0, -3)).Message;
             Assert.Equal("Length cannot be less than zero. (Parameter 'length')", message);
         }
+
+        [Theory]
+        [InlineData(default, default)]
+        [InlineData("test diacritics èòàùçé", "test diacritics eoauce")]
+        public void ShouldRemoveDiacritics(string input, string expected)
+        {
+            Assert.Equal(expected, input.RemoveDiacritics());
+        }
     }
 }
