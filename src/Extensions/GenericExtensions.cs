@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 
 namespace Extensions
@@ -24,5 +27,28 @@ namespace Extensions
         }
 
         public static T Clone<T>(this T _this) => JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(_this));
+
+        public static T DeepClone<T>(this T obj) where T : ISerializable
+        {
+            T objResult;
+            using (var ms = new MemoryStream())
+            {
+                var bf = new BinaryFormatter();
+                bf.Serialize(ms, obj);
+                ms.Position = 0;
+                objResult = (T)bf.Deserialize(ms);
+            }
+            return objResult;
+        }
+
+        public static bool ToBool<T>(this T o) => o switch
+        {
+            bool b => b,
+            int i => i != default,
+            string s => bool.TryParse(s, out var res) && res,
+            float f => f != default,
+            double d => d != default,
+            _ => o != null
+        };
     }
 }

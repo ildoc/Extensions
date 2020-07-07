@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace Extensions
@@ -21,6 +23,11 @@ namespace Extensions
                 list[k] = list[n];
                 list[n] = value;
             }
+        }
+
+        public static List<T> Clone<T>(this List<T> listToClone) where T : ICloneable
+        {
+            return listToClone.ConvertAll(item => (T)item.Clone());
         }
     }
 }

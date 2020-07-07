@@ -35,5 +35,10 @@ namespace Extensions
             //If we have no description attribute, just return the ToString of the enum
             return enumerationValue.ToString();
         }
+
+        public static T[] GetValues<T>(this Enum e) where T : Enum
+        {
+            return null;
+        }
     }
 }
