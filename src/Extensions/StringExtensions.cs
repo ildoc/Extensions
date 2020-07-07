@@ -158,5 +158,18 @@ namespace Extensions
 
             return text.Substring(startIndex, length);
         }
+
+        public static string Reverse(this string text)
+        {
+            if (text == default)
+                return text;
+
+            if (text.Length <= 1)
+                return text;
+
+            var chars = text.ToCharArray();
+            Array.Reverse(chars);
+            return new string(chars);
+        }
     }
 }
