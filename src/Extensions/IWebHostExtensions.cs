@@ -15,6 +15,11 @@ namespace Extensions
         public static bool IsInKubernetes(this IWebHost webHost)
         {
             var cfg = webHost.Services.GetService<IConfiguration>();
+            return CheckIfK8s(cfg);
+        }
+
+        private static bool CheckIfK8s(IConfiguration cfg)
+        {
             var orchestratorType = cfg.GetValue<string>("OrchestratorType");
             return orchestratorType?.ToUpper() == "K8S";
         }
@@ -24,6 +29,30 @@ namespace Extensions
             var underK8s = webHost.IsInKubernetes();
 
             using var scope = webHost.Services.CreateScope();
+
+            TryMigrateAndSeed(scope, underK8s, seeder);
+
+            return webHost;
+        }
+
+        public static bool IsInKubernetes(this Microsoft.Extensions.Hosting.IHost host)
+        {
+            var cfg = host.Services.GetService<IConfiguration>();
+            return CheckIfK8s(cfg);
+        }
+
+        public static Microsoft.Extensions.Hosting.IHost MigrateDbContext<TContext>(this Microsoft.Extensions.Hosting.IHost webHost, Action<TContext, IServiceProvider> seeder) where TContext : DbContext
+        {
+            var underK8s = webHost.IsInKubernetes();
+
+            using var scope = webHost.Services.CreateScope();
+            TryMigrateAndSeed(scope, underK8s, seeder);
+
+            return webHost;
+        }
+
+        private static void TryMigrateAndSeed<TContext>(IServiceScope scope, bool underK8s, Action<TContext, IServiceProvider> seeder) where TContext : DbContext
+        {
             var services = scope.ServiceProvider;
 
             var logger = services.GetRequiredService<ILogger<TContext>>();
@@ -65,8 +94,6 @@ namespace Extensions
                     throw;          // Rethrow under k8s because we rely on k8s to re-run the pod
                 }
             }
-
-            return webHost;
         }
 
         private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext context, IServiceProvider services)

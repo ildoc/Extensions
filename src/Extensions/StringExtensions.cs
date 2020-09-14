@@ -36,12 +36,17 @@ namespace Extensions
             return IsPathRooted(path) ? path : Combine(Directory.GetCurrentDirectory(), path);
         }
 
+        public static string Slice(this string source, int start)
+            => source.Slice(start, source.Length);
+
         public static string Slice(this string source, int start, int end)
         {
             if (source == default)
                 throw new ArgumentException("Cannot slice a null string");
             if (start < 0)
                 throw new ArgumentException("Slice cannot have a negative start");
+            if (start >= source.Length)
+                return "";
 
             if (end < 0) // Keep this for negative end support
                 end = source.Length + end;
@@ -170,6 +175,14 @@ namespace Extensions
             var chars = text.ToCharArray();
             Array.Reverse(chars);
             return new string(chars);
+        }
+
+        public static string LowerFirstLetter(this string text)
+        {
+            if (text == default)
+                return text;
+
+            return text.Slice(0, 1).ToLower() + text.Slice(1);
         }
     }
 }
