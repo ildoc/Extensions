@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Utils.Enums;
 
@@ -72,6 +74,15 @@ namespace Extensions
             where T : class
         {
             return condition ? transform(source) : source;
+        }
+
+        public static Task<List<TSource>> ToListAsyncSafe<TSource>(this IQueryable<TSource> source)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (!(source is IAsyncEnumerable<TSource>))
+                return Task.FromResult(source.ToList());
+            return source.ToListAsync();
         }
     }
 }
