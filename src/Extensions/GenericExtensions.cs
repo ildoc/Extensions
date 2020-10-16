@@ -30,15 +30,12 @@ namespace Extensions
 
         public static T DeepClone<T>(this T obj) where T : ISerializable
         {
-            T objResult;
-            using (var ms = new MemoryStream())
-            {
-                var bf = new BinaryFormatter();
-                bf.Serialize(ms, obj);
-                ms.Position = 0;
-                objResult = (T)bf.Deserialize(ms);
-            }
-            return objResult;
+            using var ms = new MemoryStream();
+
+            var bf = new BinaryFormatter();
+            bf.Serialize(ms, obj);
+            ms.Position = 0;
+            return (T)bf.Deserialize(ms);
         }
 
         public static bool ToBool<T>(this T o) => o switch
