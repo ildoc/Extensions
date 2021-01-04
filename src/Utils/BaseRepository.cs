@@ -7,13 +7,13 @@ namespace Utils
 {
     public interface IRepository<T> where T : class
     {
-        Task<T> Add(T entity);
-        Task<IEnumerable<T>> AddRange(IEnumerable<T> entities);
+        Task<T> AddAsync(T entity);
+        Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
         IQueryable<T> GetAll();
-        Task<T> Update(T entity);
-        Task<IEnumerable<T>> UpdateRange(IEnumerable<T> entities);
-        Task<T> Remove(T entity);
-        Task<IEnumerable<T>> RemoveRange(IEnumerable<T> entities);
+        Task<T> UpdateAsync(T entity);
+        Task<IEnumerable<T>> UpdateRangeAsync(IEnumerable<T> entities);
+        Task<T> RemoveAsync(T entity);
+        Task<IEnumerable<T>> RemoveRangeAsync(IEnumerable<T> entities);
     }
 
     public abstract class BaseRepository<T> : IRepository<T> where T : class, new()
@@ -25,16 +25,16 @@ namespace Utils
             _context = context;
         }
 
-        public virtual async Task<T> Add(T entity)
+        public virtual async Task<T> AddAsync(T entity)
         {
             _context.Add(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public virtual async Task<IEnumerable<T>> AddRange(IEnumerable<T> entities)
+        public virtual async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
         {
-            _context.AddRange(entities);
+            await _context.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
             return entities;
         }
@@ -44,28 +44,28 @@ namespace Utils
             return _context.Set<T>();
         }
 
-        public virtual async Task<T> Remove(T entity)
+        public virtual async Task<T> RemoveAsync(T entity)
         {
             _context.Remove(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public virtual async Task<IEnumerable<T>> RemoveRange(IEnumerable<T> entities)
+        public virtual async Task<IEnumerable<T>> RemoveRangeAsync(IEnumerable<T> entities)
         {
             _context.RemoveRange(entities);
             await _context.SaveChangesAsync();
             return entities;
         }
 
-        public virtual async Task<T> Update(T entity)
+        public virtual async Task<T> UpdateAsync(T entity)
         {
             _context.Update(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public virtual async Task<IEnumerable<T>> UpdateRange(IEnumerable<T> entities)
+        public virtual async Task<IEnumerable<T>> UpdateRangeAsync(IEnumerable<T> entities)
         {
             _context.UpdateRange(entities);
             await _context.SaveChangesAsync();
