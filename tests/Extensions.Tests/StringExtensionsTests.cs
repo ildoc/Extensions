@@ -239,5 +239,15 @@ namespace Extensions.Tests
         {
             Assert.Equal(expected, input.RemoveDiacritics());
         }
+
+        [Theory]
+        [InlineData(default, 0)]
+        [InlineData("42", 42)]
+        [InlineData("asd", 0)]
+        [InlineData("32.1", 0)]
+        public void ShouldConvertToInt32(string input, int expected)
+        {
+            Assert.Equal(expected, input.ToInt32());
+        }
     }
 }

@@ -184,5 +184,12 @@ namespace Extensions
 
             return text.Slice(0, 1).ToLower() + text.Slice(1);
         }
+
+        public static int ToInt32(this string text)
+        {
+            if (!text.IsNumeric())
+                return 0;
+            return Convert.ToInt32(text);
+        }
     }
 }
