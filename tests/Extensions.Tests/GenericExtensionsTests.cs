@@ -100,6 +100,17 @@ namespace Extensions.Tests
             Assert.Equal(casted.TimeStamp, anon.TimeStamp);
         }
 
+        [Theory]
+        [InlineData(null, null, true)]
+        [InlineData(3, "asd", false)]
+        [InlineData(null, 3, false)]
+        [InlineData(3, null, false)]
+        [InlineData("asd", "asd", true)]
+        public void ShouldReturnEqual(object a, object b, bool expected)
+        {
+            Assert.Equal(expected, a.IsEqualTo(b));
+        }
+
         private class TestClass
         {
             public int Id { get; set; }

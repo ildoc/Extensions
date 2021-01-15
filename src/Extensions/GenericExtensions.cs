@@ -47,5 +47,50 @@ namespace Extensions
             double d => d != default,
             _ => o != null
         };
+
+        public static bool IsEqualTo(this object? a, object? b)
+        {
+            if (a == default && b != default)
+                return false;
+            if (a == default && b == default)
+                return true;
+            return a.Equals(b);
+        }
+
+        public static List<Variance> DetailedCompare<T>(this T val1, T val2)
+        {
+            var variances = new List<Variance>();
+            foreach (var f in val1.GetType().GetFields())
+            {
+                var v = new Variance
+                {
+                    Prop = f.Name,
+                    ValA = f.GetValue(val1),
+                    ValB = f.GetValue(val2)
+                };
+                if (!v.ValA.IsEqualTo(v.ValB))
+                    variances.Add(v);
+            }
+
+            foreach (var p in val1.GetType().GetProperties())
+            {
+                var v = new Variance
+                {
+                    Prop = p.Name,
+                    ValA = p.GetValue(val1),
+                    ValB = p.GetValue(val2)
+                };
+                if (!v.ValA.IsEqualTo(v.ValB))
+                    variances.Add(v);
+            }
+            return variances;
+        }
+    }
+
+    public class Variance
+    {
+        public string Prop { get; set; }
+        public object ValA { get; set; }
+        public object ValB { get; set; }
     }
 }

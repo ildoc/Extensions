@@ -36,9 +36,12 @@ namespace Extensions
             return enumerationValue.ToString();
         }
 
-        public static T[] GetValues<T>(this Enum e) where T : Enum
+        public static int ToInt<T>(this T e) where T : Enum
         {
-            return null;
+            if (!typeof(T).IsEnum)
+                throw new ArgumentException("T must be an enumerated type");
+
+            return (int)(IConvertible)e;
         }
     }
 }
