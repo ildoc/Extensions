@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Extensions.Tests
@@ -81,6 +82,26 @@ namespace Extensions.Tests
         public void ShouldCheckIfValueIsNotInString(char value, string fullString, bool expected)
         {
             Assert.Equal(expected, value.IsNotIn(fullString));
+        }
+
+        [Fact]
+        public void ShouldCheckIfStringIsInStrings()
+        {
+            var value = "test";
+            var strings = new List<string> { "this", "is", "a", "test" };
+
+            Assert.True(value.IsIn(strings));
+            Assert.False(value.IsNotIn(strings));
+        }
+
+        [Fact]
+        public void ShouldCheckIfStringIsNotInStrings()
+        {
+            var value = "not";
+            var strings = new List<string> { "this", "is", "a", "test" };
+
+            Assert.False(value.IsIn(strings));
+            Assert.True(value.IsNotIn(strings));
         }
 
         [Fact]
