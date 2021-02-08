@@ -7,6 +7,7 @@ namespace Utils
 {
     public interface IRepository<T> where T : class
     {
+        Task<T> GetByIdAsync<TId>(TId id);
         Task<T> AddAsync(T entity);
         Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
         IQueryable<T> GetAll();
@@ -19,6 +20,9 @@ namespace Utils
     public abstract class BaseRepository<T> : IRepository<T> where T : class, new()
     {
         private readonly DbContext _context;
+
+        public virtual Task<T> GetByIdAsync<TId>(TId id) =>
+            _context.Set<T>().FindAsync(id).AsTask();
 
         protected BaseRepository(DbContext context)
         {
