@@ -20,5 +20,11 @@ namespace Extensions
 
         public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> enumerable, bool condition, Func<T, bool> f) =>
            condition ? enumerable.Where(f) : enumerable;
+
+        public static IEnumerable<T> ConcatIf<T>(this IEnumerable<T> enumerable, bool condition, IEnumerable<T> otherEnumerable) =>
+           condition ? enumerable.Concat(otherEnumerable) : enumerable;
+
+        public static IEnumerable<T> ConcatIfElse<T>(this IEnumerable<T> enumerable, bool condition, IEnumerable<T> ifEnumerable, IEnumerable<T> elseEnumerable) =>
+           condition ? enumerable.Concat(ifEnumerable) : enumerable.Concat(elseEnumerable);
     }
 }
