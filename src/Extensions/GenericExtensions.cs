@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 
 namespace Extensions
@@ -32,10 +31,10 @@ namespace Extensions
         {
             using var ms = new MemoryStream();
 
-            var bf = new BinaryFormatter();
-            bf.Serialize(ms, obj);
+            var bf = new DataContractSerializer(typeof(T));
+            bf.WriteObject(ms, obj);
             ms.Position = 0;
-            return (T)bf.Deserialize(ms);
+            return (T)bf.ReadObject(ms);
         }
 
         public static bool ToBool<T>(this T o) => o switch
@@ -48,14 +47,16 @@ namespace Extensions
             _ => o != null
         };
 
+#nullable enable
         public static bool IsEqualTo(this object? a, object? b)
         {
             if (a == default && b != default)
                 return false;
             if (a == default && b == default)
                 return true;
-            return a.Equals(b);
+            return a?.Equals(b) ?? false;
         }
+#nullable disable
 
         public static List<Variance> DetailedCompare<T>(this T val1, T val2)
         {
