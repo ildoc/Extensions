@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace Extensions
 {
@@ -12,6 +13,18 @@ namespace Extensions
         public static T OneOf<T>(this Random random, params T[] values)
         {
             return values[random.Next(values.Length)];
+        }
+
+        public static string NextHexColor(this Random random)
+        {
+            var color = random.NextColor();
+            return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        }
+
+        public static Color NextColor(this Random random)
+        {
+            var colors = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+            return Color.FromKnownColor(colors[random.Next(colors.Length)]);
         }
 
         public static bool CoinToss(this Random random)
