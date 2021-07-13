@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Extensions.Tests
@@ -84,6 +85,26 @@ namespace Extensions.Tests
         }
 
         [Fact]
+        public void ShouldCheckIfStringIsInStrings()
+        {
+            var value = "test";
+            var strings = new List<string> { "this", "is", "a", "test" };
+
+            Assert.True(value.IsIn(strings));
+            Assert.False(value.IsNotIn(strings));
+        }
+
+        [Fact]
+        public void ShouldCheckIfStringIsNotInStrings()
+        {
+            var value = "not";
+            var strings = new List<string> { "this", "is", "a", "test" };
+
+            Assert.False(value.IsIn(strings));
+            Assert.True(value.IsNotIn(strings));
+        }
+
+        [Fact]
         public void ShouldCastFromAnonymousObject()
         {
             var anon = new
@@ -98,6 +119,17 @@ namespace Extensions.Tests
             Assert.Equal(casted.Id, anon.Id);
             Assert.Equal(casted.Description, anon.Description);
             Assert.Equal(casted.TimeStamp, anon.TimeStamp);
+        }
+
+        [Theory]
+        [InlineData(null, null, true)]
+        [InlineData(3, "asd", false)]
+        [InlineData(null, 3, false)]
+        [InlineData(3, null, false)]
+        [InlineData("asd", "asd", true)]
+        public void ShouldReturnEqual(object a, object b, bool expected)
+        {
+            Assert.Equal(expected, a.IsEqualTo(b));
         }
 
         private class TestClass
