@@ -26,8 +26,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Notifications",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Scheduler", "src\Boilerplate.Scheduler\Boilerplate.Scheduler.csproj", "{878E6AAC-776D-4F16-81E8-EC5EF9B3CBD9}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{69E5AF71-3072-4D37-B7CE-D15F41CD9039}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,10 +56,6 @@ Global
 		{878E6AAC-776D-4F16-81E8-EC5EF9B3CBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{878E6AAC-776D-4F16-81E8-EC5EF9B3CBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{878E6AAC-776D-4F16-81E8-EC5EF9B3CBD9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69E5AF71-3072-4D37-B7CE-D15F41CD9039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69E5AF71-3072-4D37-B7CE-D15F41CD9039}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69E5AF71-3072-4D37-B7CE-D15F41CD9039}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69E5AF71-3072-4D37-B7CE-D15F41CD9039}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

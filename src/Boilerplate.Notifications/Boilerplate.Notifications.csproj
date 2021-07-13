@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\common\Boilerplate.Common\Boilerplate.Common.csproj" />
     <ProjectReference Include="..\..\common\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\..\common\Utils\Utils.csproj" />
   </ItemGroup>
