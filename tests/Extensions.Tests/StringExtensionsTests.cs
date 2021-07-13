@@ -78,6 +78,14 @@ namespace Extensions.Tests
         }
 
         [Theory]
+        [InlineData("test string", 0, "test string")]
+        [InlineData("test string", 2, "st string")]
+        public void ShouldSliceStringWithStart(string value, int start, string expected)
+        {
+            Assert.Equal(expected, value.Slice(start));
+        }
+
+        [Theory]
         [InlineData("test string", 2, 7, "st st")]
         [InlineData("test string", 2, -2, "st stri")]
         public void ShouldSliceString(string value, int start, int end, string expected)
@@ -238,6 +246,16 @@ namespace Extensions.Tests
         public void ShouldRemoveDiacritics(string input, string expected)
         {
             Assert.Equal(expected, input.RemoveDiacritics());
+        }
+
+        [Theory]
+        [InlineData(default, default)]
+        [InlineData("test", "test")]
+        [InlineData("TEST", "tEST")]
+        [InlineData("Test", "test")]
+        public void ShouldLowerFirstLetter(string input, string expected)
+        {
+            Assert.Equal(expected, input.LowerFirstLetter());
         }
     }
 }
