@@ -43,13 +43,13 @@ namespace Extensions
         {
             if (source == default)
                 throw new ArgumentException("Cannot slice a null string");
-            if (start < 0)
-                throw new ArgumentException("Slice cannot have a negative start");
             if (start >= source.Length)
                 return "";
 
             if (end < 0) // Keep this for negative end support
                 end = source.Length + end;
+            if (start < 0) // Keep this for negative end support
+                start = source.Length + start;
             var len = end - start; // Calculate length
             return source.Substring(start, len); // Return Substring of length
         }
@@ -190,6 +190,11 @@ namespace Extensions
             if (!text.IsNumeric())
                 return 0;
             return Convert.ToInt32(text);
+        }
+
+        public static string Except(this string text1, string text2)
+        {
+           return text1.ToCharArray().Where(x => !text2.Contains(x)).Join("");
         }
     }
 }
