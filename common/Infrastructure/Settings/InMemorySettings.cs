@@ -1,6 +1,6 @@
-﻿using Boilerplate.Common.Keycloak;
+﻿using Infrastructure.Keycloak;
 
-namespace Boilerplate.Common.Settings
+namespace Infrastructure.Settings
 {
     public class InMemorySettings
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.Exceptions
+namespace Infrastructure.Exceptions
 {
     public static class Extensions
     {

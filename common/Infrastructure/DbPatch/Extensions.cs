@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.DbPatch
+namespace Infrastructure.DbPatch
 {
     public static class Extensions
     {

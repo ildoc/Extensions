@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Common.MassTransit.Messages
+﻿namespace Infrastructure.MassTransit.Messages
 {
     public interface ITestMessageSent : IMessage
     {

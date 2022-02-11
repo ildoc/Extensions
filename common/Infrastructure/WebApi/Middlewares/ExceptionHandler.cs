@@ -2,9 +2,9 @@
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Boilerplate.Common.WebApi.Models;
+using Infrastructure.WebApi.Models;
 
-namespace Boilerplate.Common.WebApi.Middlewares
+namespace Infrastructure.WebApi.Middlewares
 {
     public class ExceptionHandler
     {

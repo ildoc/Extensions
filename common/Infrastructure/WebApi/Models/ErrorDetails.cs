@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Boilerplate.Common.WebApi.Models
+namespace Infrastructure.WebApi.Models
 {
     public class ErrorDetails
     {

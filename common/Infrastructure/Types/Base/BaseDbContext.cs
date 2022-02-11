@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Boilerplate.Common.Authorization;
-using Boilerplate.Common.Types.Interfaces;
+using Infrastructure.Authorization;
+using Infrastructure.Types.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Boilerplate.Common.Types.Base
+namespace Infrastructure.Types.Base
 {
     public abstract class BaseDbContext : DbContext
     {

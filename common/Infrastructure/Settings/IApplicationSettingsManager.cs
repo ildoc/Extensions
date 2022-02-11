@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Boilerplate.Common.Settings
+namespace Infrastructure.Settings
 {
     public interface IApplicationSettingsManager
     {

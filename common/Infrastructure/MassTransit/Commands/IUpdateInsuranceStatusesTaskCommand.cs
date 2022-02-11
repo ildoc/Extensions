@@ -1,6 +1,6 @@
-﻿using Boilerplate.Common.MassTransit.Messages;
+﻿using Infrastructure.MassTransit.Messages;
 
-namespace Boilerplate.Common.MassTransit.Commands
+namespace Infrastructure.MassTransit.Commands
 {
     public interface IUpdateInsuranceStatusesTaskCommand : ICommandMessage, IScheduledTask { }
     public interface IUpdateInsuranceStatusesTaskResult : ICommandResultMessage, IScheduledTask { }

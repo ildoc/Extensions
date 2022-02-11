@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Common.Types.Const
+﻿namespace Infrastructure.Types.Const
 {
     public static class RoleType
     {

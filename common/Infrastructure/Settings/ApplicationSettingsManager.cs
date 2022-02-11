@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Boilerplate.Common.Types.Base;
+using Infrastructure.Types.Base;
 
-namespace Boilerplate.Common.Settings
+namespace Infrastructure.Settings
 {
     public class ApplicationSettingsManager : IApplicationSettingsManager
     {

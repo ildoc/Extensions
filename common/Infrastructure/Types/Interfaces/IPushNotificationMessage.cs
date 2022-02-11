@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Boilerplate.Common.Types.Interfaces
+namespace Infrastructure.Types.Interfaces
 {
     public interface IPushNotificationMessage
     {

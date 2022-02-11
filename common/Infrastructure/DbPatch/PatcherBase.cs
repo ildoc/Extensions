@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Boilerplate.Common.Settings;
+using Infrastructure.Settings;
 using Extensions;
 
-namespace Boilerplate.Common.DbPatch
+namespace Infrastructure.DbPatch
 {
     public abstract class PatcherBase : IPatcher
     {

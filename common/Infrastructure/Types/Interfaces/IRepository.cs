@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Boilerplate.Common.Authorization;
+using Infrastructure.Authorization;
 
-namespace Boilerplate.Common.Types.Interfaces
+namespace Infrastructure.Types.Interfaces
 {
     public interface IRepository<T> : Utils.IRepository<T> where T : class
     {

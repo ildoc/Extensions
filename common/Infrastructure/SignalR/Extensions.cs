@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Boilerplate.Common.Authorization;
+using Infrastructure.Authorization;
 
-namespace Boilerplate.Common.SignalR
+namespace Infrastructure.SignalR
 {
     public static class Extensions
     {

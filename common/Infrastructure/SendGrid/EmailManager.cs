@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace Boilerplate.Common.SendGrid
+namespace Infrastructure.SendGrid
 {
     public class EmailManager : IEmailManager
     {

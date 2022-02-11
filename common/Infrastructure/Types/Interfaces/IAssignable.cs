@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Common.Types.Interfaces
+﻿namespace Infrastructure.Types.Interfaces
 {
     public interface IAssignable
     {

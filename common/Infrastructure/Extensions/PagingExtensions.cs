@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Boilerplate.Common.Types.Paging;
+using Infrastructure.Types.Paging;
 
-namespace Boilerplate.Common.Extensions
+namespace Infrastructure.Extensions
 {
     public static class PagingExtensions
     {

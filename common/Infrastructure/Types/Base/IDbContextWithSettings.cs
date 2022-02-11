@@ -4,13 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Boilerplate.Common.Settings;
+using Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Boilerplate.Common.Types.Base
+namespace Infrastructure.Types.Base
 {
     public interface IDbContextWithSettings : IDbContext
     {

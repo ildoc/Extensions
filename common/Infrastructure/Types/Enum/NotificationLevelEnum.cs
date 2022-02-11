@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Common.Types.Enums
+﻿namespace Infrastructure.Types.Enum
 {
     public enum NotificationLevelEnum
     {

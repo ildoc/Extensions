@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.Http
+namespace Infrastructure.Http
 {
     public static class Extensions
     {

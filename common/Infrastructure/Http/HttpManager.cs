@@ -6,7 +6,7 @@ using CSharpFunctionalExtensions;
 using Extensions;
 using Newtonsoft.Json;
 
-namespace Boilerplate.Common.Http
+namespace Infrastructure.Http
 {
     public class HttpManager : IHttpManager
     {

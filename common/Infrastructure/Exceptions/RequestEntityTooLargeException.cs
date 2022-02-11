@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Boilerplate.Common.Exceptions
+namespace Infrastructure.Exceptions
 {
     public class RequestEntityTooLargeException : Exception
     {

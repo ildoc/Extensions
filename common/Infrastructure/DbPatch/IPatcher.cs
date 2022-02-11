@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Boilerplate.Common.DbPatch
+namespace Infrastructure.DbPatch
 {
     public interface IPatcher
     {

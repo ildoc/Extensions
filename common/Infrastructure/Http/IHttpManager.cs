@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 
-namespace Boilerplate.Common.Http
+namespace Infrastructure.Http
 {
     public interface IHttpManager
     {

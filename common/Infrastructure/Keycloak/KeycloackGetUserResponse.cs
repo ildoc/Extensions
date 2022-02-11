@@ -1,4 +1,4 @@
-﻿namespace Microservices.Users.KC
+﻿namespace Infrastructure.Keycloak
 {
     //public class KeycloackGetUserResponse
     //{

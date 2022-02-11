@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Boilerplate.Common.WebApi.Controllers
+namespace Infrastructure.WebApi.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

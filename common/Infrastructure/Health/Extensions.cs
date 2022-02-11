@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.Health
+namespace Infrastructure.Health
 {
     public static class Extensions
     {

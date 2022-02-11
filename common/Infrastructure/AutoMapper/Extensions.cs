@@ -1,15 +1,21 @@
 ﻿using AutoMapper;
+using Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.AutoMapper
+namespace Infrastructure.AutoMapper
 {
     public static class Extensions
     {
         public static IServiceCollection AddAutomapper(this IServiceCollection _this, Profile profile)
         {
+            return _this.AddAutomapper(new List<Profile> { profile });
+        }
+
+        public static IServiceCollection AddAutomapper(this IServiceCollection _this, IEnumerable<Profile> profiles)
+        {
             var configAutoMapper = new MapperConfiguration(c =>
             {
-                c.AddProfile(profile);
+                profiles.Each(p => c.AddProfile(p));
             });
             // configAutoMapper.AssertConfigurationIsValid();
             var mapper = configAutoMapper.CreateMapper();

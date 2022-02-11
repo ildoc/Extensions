@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Boilerplate.Common.SendGrid
+namespace Infrastructure.SendGrid
 {
     public class EmailToSend
     {
