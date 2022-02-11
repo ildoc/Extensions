@@ -55,6 +55,16 @@ namespace Extensions
 
         public static IQueryable<T> WhereIf<T>(this IQueryable<T> querable, bool condition, Func<T, bool> f) =>
             condition ? querable.Where(f).AsQueryable() : querable;
+        public static IQueryable<T> WhereIfElse<T>(this IQueryable<T> querable, bool condition, Func<T, bool> @if, Func<T, bool> @else) =>
+            condition ? querable.Where(@if).AsQueryable() : querable.Where(@else).AsQueryable();
+
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> querable, bool condition, Expression<Func<T, bool>> f) =>
+            condition ? querable.Where(f).AsQueryable() : querable;
+        public static IQueryable<T> WhereIfElse<T>(this IQueryable<T> querable, bool condition, Expression<Func<T, bool>> @if, Expression<Func<T, bool>> @else) =>
+            condition ? querable.Where(@if).AsQueryable() : querable.Where(@else).AsQueryable();
+
+        public static IQueryable<T> AsNoTrackingIf<T>(this IQueryable<T> querable, bool condition) where T : class =>
+            condition ? querable.AsNoTracking() : querable;
 
         public static IQueryable<T> If<T, TP>(
                 this IIncludableQueryable<T, TP> source,
@@ -80,9 +90,9 @@ namespace Extensions
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
-            if (!(source is IAsyncEnumerable<TSource>))
+            if (source is not IAsyncEnumerable<TSource>)
                 return Task.FromResult(source.ToList());
             return source.ToListAsync();
-        }
+        }       
     }
 }
