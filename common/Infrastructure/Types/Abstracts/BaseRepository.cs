@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Boilerplate.Common.Authorization;
-using Boilerplate.Common.Types.Base;
-using Boilerplate.Common.Types.Interfaces;
+using Infrastructure.Authorization;
+using Infrastructure.Types.Base;
+using Infrastructure.Types.Interfaces;
 
-namespace Boilerplate.Common.Types.Abstracts
+namespace Infrastructure.Types.Abstracts
 {
     public abstract class BaseRepository<T> : Utils.BaseRepository<T>, IRepository<T> where T : class, new()
     {

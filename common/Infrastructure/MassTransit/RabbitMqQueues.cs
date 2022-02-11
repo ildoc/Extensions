@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Common.MassTransit
+﻿namespace Infrastructure.MassTransit
 {
     public class RabbitMqQueues
     {

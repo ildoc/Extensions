@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Boilerplate.Common.Authorization;
-using Boilerplate.Common.Types.Const;
+using Infrastructure.Authorization;
+using Infrastructure.Types.Const;
 
-namespace Boilerplate.Common.Extensions
+namespace Infrastructure.Extensions
 {
     public static class UserInfoExtensions
     {

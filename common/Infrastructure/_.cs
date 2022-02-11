@@ -1,7 +1,7 @@
 ﻿using System;
-using Boilerplate.Common.Exceptions;
+using Infrastructure.Exceptions;
 
-namespace Boilerplate.Common
+namespace Infrastructure
 {
     public static class _
     {

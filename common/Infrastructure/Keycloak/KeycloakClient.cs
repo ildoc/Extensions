@@ -5,8 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-using Boilerplate.Common.Exceptions;
-using Microservices.Users.KC;
+using Infrastructure.Exceptions;
 using CSharpFunctionalExtensions;
 using Extensions;
 using Microsoft.Extensions.Options;
@@ -14,7 +13,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace Boilerplate.Common.Keycloak
+namespace Infrastructure.Keycloak
 {
     public class KeycloakClient : IKeycloakClient
     {

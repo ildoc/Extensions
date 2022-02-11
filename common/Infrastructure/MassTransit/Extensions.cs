@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.MassTransit
+namespace Infrastructure.MassTransit
 {
     public static class Extensions
     {

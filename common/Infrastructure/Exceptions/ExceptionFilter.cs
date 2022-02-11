@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Utils;
 
-namespace Boilerplate.Common.Exceptions
+namespace Infrastructure.Exceptions
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class ExceptionFilter : ExceptionFilterAttribute

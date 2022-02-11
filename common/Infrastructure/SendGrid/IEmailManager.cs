@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 
-namespace Boilerplate.Common.SendGrid
+namespace Infrastructure.SendGrid
 {
     public interface IEmailManager
     {

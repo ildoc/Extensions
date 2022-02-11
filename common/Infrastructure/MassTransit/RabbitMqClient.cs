@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MassTransit;
 
-namespace Boilerplate.Common.MassTransit
+namespace Infrastructure.MassTransit
 {
     public interface IRabbitMqClient
     {

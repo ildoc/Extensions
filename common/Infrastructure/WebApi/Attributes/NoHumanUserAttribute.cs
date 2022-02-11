@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Boilerplate.Common.WebApi.Attributes
+namespace Infrastructure.WebApi.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class NoHumanUser : Attribute, IAuthorizationFilter

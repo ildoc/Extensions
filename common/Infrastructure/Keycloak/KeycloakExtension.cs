@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Boilerplate.Common.Keycloak;
+using Infrastructure.Keycloak;
 
-namespace Boilerplate.Common.Keycloak
+namespace Infrastructure.Keycloak
 {
     public static class KeycloakExtension
     {

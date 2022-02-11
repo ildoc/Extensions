@@ -1,7 +1,7 @@
-﻿using Boilerplate.Common.Settings;
+﻿using Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 
-namespace Boilerplate.Common.Types.Base
+namespace Infrastructure.Types.Base
 {
     public class BaseDbContextWithSettings : BaseDbContext, IDbContextWithSettings
     {

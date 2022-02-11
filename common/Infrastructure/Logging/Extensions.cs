@@ -1,10 +1,10 @@
-﻿using Boilerplate.Common.Authorization;
+﻿using Infrastructure.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace Boilerplate.Common.Logging
+namespace Infrastructure.Logging
 {
     public static class Extensions
     {

@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Common.Settings
+﻿namespace Infrastructure.Settings
 {
     public static class ApplicationSettingsConsts
     {

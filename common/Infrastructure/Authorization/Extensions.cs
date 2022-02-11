@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using Boilerplate.Common.Types.Const;
+using Infrastructure.Types.Const;
 using Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.Authorization
+namespace Infrastructure.Authorization
 {
     public static class Extensions
     {

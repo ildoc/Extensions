@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SendGrid.Extensions.DependencyInjection;
 
-namespace Boilerplate.Common.SendGrid
+namespace Infrastructure.SendGrid
 {
     public static class Extensions
     {

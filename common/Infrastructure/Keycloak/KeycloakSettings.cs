@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Common.Keycloak
+﻿namespace Infrastructure.Keycloak
 {
     public class KeycloakSettings
     {

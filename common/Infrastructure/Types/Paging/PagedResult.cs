@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Boilerplate.Common.Types.Paging
+namespace Infrastructure.Types.Paging
 {
-    public class PagedResult<T>
+    public class PagedResult<T> //: PagedResultBase
     {
         public IEnumerable<T> Items { get; }
         public int TotalItems { get; }

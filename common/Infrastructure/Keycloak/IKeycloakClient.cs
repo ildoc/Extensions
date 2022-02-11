@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microservices.Users.KC;
 using CSharpFunctionalExtensions;
 
-namespace Boilerplate.Common.Keycloak
+namespace Infrastructure.Keycloak
 {
     public interface IKeycloakClient
     {

@@ -1,6 +1,6 @@
-﻿using Boilerplate.Common.Authorization;
+﻿using Infrastructure.Authorization;
 
-namespace Boilerplate.Common.MassTransit.Commands
+namespace Infrastructure.MassTransit.Commands
 {
     public interface IGetUserInfoCommand : ICommandMessage
     {

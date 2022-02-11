@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Boilerplate.Common.Types.Interfaces
+namespace Infrastructure.Types.Interfaces
 {
     public interface ISystemEntity
     {

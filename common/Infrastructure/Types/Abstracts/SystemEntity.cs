@@ -1,7 +1,7 @@
 ﻿using System;
-using Boilerplate.Common.Types.Interfaces;
+using Infrastructure.Types.Interfaces;
 
-namespace Boilerplate.Common.Types.Abstracts
+namespace Infrastructure.Types.Abstracts
 {
     public abstract class SystemEntity : ISystemEntity
     {

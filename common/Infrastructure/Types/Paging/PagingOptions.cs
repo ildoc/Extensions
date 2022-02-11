@@ -1,6 +1,6 @@
 ﻿using Utils.Enums;
 
-namespace Boilerplate.Common.Types.Paging
+namespace Infrastructure.Types.Paging
 {
     public class PagingOptions
     {

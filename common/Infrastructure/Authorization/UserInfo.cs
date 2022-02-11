@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Boilerplate.Common.Authorization
+namespace Infrastructure.Authorization
 {
     public record UserInfo
     {

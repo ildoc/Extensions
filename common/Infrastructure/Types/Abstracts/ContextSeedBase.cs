@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Polly;
 
-namespace Boilerplate.Common.Types.Abstracts
+namespace Infrastructure.Types.Abstracts
 {
     public abstract class ContextSeedBase<T>
     {
