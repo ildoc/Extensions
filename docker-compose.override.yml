@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+
+  rabbitmq:
+    ports:
+      - "15672:15672"  # Important: In a production environment your should remove the external port
+      - "5672:5672"
+
+  seq:
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5340:80"
+
+  sql:
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SaPassword!
+    ports:
+      - "1433:1433"
