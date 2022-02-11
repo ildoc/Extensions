@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using Xunit;
 
@@ -80,16 +81,11 @@ namespace Extensions.Tests
         [Theory]
         [InlineData("test string", 2, 7, "st st")]
         [InlineData("test string", 2, -2, "st stri")]
+        [InlineData("test string", -5, -2, "tri")]
+        [InlineData("test string", -2, 0, "ng")]
         public void ShouldSliceString(string value, int start, int end, string expected)
         {
             Assert.Equal(expected, value.Slice(start, end));
-        }
-
-        [Fact]
-        public void SliceShouldThrowExceptionIfStartIsNegative()
-        {
-            var message = Assert.Throws<ArgumentException>(() => "test string".Slice(-1, 5)).Message;
-            Assert.Equal("Slice cannot have a negative start", message);
         }
 
         [Fact]
@@ -248,6 +244,13 @@ namespace Extensions.Tests
         public void ShouldConvertToInt32(string input, int expected)
         {
             Assert.Equal(expected, input.ToInt32());
+        }
+
+        [Theory]
+        [InlineData("provaprova", "oa", "prvprv")]
+        public void ShouldRemoveCharFromString(string text1, string text2, string expected)
+        {
+            Assert.Equal(expected, text1.Except(text2));
         }
     }
 }
