@@ -8,7 +8,7 @@ namespace Extensions
     {
         public static void Shuffle<T>(this IList<T> list)
         {
-            var provider = new RNGCryptoServiceProvider();
+            var provider = RandomNumberGenerator.Create();
             var n = list.Count;
             while (n > 1)
             {
