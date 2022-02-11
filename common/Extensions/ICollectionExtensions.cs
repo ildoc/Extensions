@@ -28,7 +28,7 @@ namespace Extensions
             return false;
         }
 
-        public static void TryUpdateManyToMany<T>(this ICollection<T> currentItems, ICollection<T> newItems, Func<T,T,bool> comparer) where T : class
+        public static void TryUpdateManyToMany<T>(this ICollection<T> currentItems, ICollection<T> newItems, Func<T, T, bool> comparer) where T : class
         {
             var toRemove = currentItems.Except(newItems, comparer).ToList();
             var toAdd = newItems.Except(currentItems, comparer).ToList();
