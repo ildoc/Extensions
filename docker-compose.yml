@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+
+  seq:
+    image: datalust/seq:latest
+
+  sql:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    volumes:
+     - mssqlsystem_vol:/var/opt/mssql
+     - mssqluser_vol:/var/opt/sqlserver
+
+  rabbitmq:
+    image: rabbitmq:management
+
+
+volumes:
+  mssqlsystem_vol:
+  mssqluser_vol:
