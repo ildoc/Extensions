@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Infrastructure.Settings
+﻿namespace Infrastructure.Settings
 {
     public interface IApplicationSettingsManager
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Infrastructure.Authorization;
+﻿using Infrastructure.Authorization;
 using Infrastructure.Types.Base;
 using Infrastructure.Types.Interfaces;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infrastructure.Exceptions
+﻿namespace Infrastructure.Exceptions
 {
     public class BadRequestException : Exception
     {

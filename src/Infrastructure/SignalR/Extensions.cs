@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Infrastructure.Authorization;
+﻿using Infrastructure.Authorization;
 
 namespace Infrastructure.SignalR
 {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Infrastructure.Settings;
+﻿using System.Text.RegularExpressions;
 using Extensions;
+using Infrastructure.Settings;
 
 namespace Infrastructure.DbPatch
 {

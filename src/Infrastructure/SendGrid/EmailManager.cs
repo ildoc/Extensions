@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 

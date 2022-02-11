@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Infrastructure.Types.Paging
+﻿namespace Infrastructure.Types.Paging
 {
     public class PagedResult<T> //: PagedResultBase
     {

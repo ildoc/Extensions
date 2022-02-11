@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure.Types.Base;
+﻿using Infrastructure.Types.Base;
 
 namespace Infrastructure.Settings
 {

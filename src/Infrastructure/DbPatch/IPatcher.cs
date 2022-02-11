@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Infrastructure.DbPatch
+﻿namespace Infrastructure.DbPatch
 {
     public interface IPatcher
     {
