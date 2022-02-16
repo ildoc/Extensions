@@ -3,7 +3,7 @@
     public interface IPatcher
     {
         void QueuePatch(Func<Task> patch);
-        Task<Version> ApplyPatches();
+        Task ApplyPatches();
 
         Version Version { get; }
     }
