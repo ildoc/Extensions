@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Extensions;
+﻿using Extensions;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;

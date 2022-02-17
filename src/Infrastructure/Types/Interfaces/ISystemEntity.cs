@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infrastructure.Types.Interfaces
+﻿namespace Infrastructure.Types.Interfaces
 {
     public interface ISystemEntity
     {
