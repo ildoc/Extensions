@@ -1,5 +1,4 @@
-﻿using System;
-using Infrastructure.Types.Interfaces;
+﻿using Infrastructure.Types.Interfaces;
 
 namespace Infrastructure.Types.Abstracts
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Infrastructure.SendGrid
+﻿namespace Infrastructure.SendGrid
 {
     public class EmailToSend
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Infrastructure.Settings;
+﻿using System.Text.RegularExpressions;
 using Extensions;
+using Infrastructure.Settings;
 
 namespace Infrastructure.DbPatch
 {
@@ -20,17 +16,23 @@ namespace Infrastructure.DbPatch
             _dbVersion = new Version(_settingsManager.GetSetting(ApplicationSettingsConsts.DBVERSION) ?? Version?.ToString() ?? "0.0.0");
         }
 
-        private async Task<Version> UpdateVersion() =>
-            new Version(await _settingsManager.SaveSetting(ApplicationSettingsConsts.DBVERSION, Version.ToString()));
+        private async Task<Version> UpdateVersion(Version v) =>
+            new Version(await _settingsManager.SaveSetting(ApplicationSettingsConsts.DBVERSION, v.ToString()));
 
-        public async Task<Version> ApplyPatches()
+        public async Task ApplyPatches()
         {
             foreach (var (version, patch) in _patches.Where(x => x.version > _dbVersion && x.version <= Version).OrderBy(x => x.version))
             {
-                patch().Wait();
+                try
+                {
+                    patch().Wait();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Error while applying patch {version}: {ex.Message} - {ex.InnerException?.Message ?? ""}");
+                }
+                await UpdateVersion(version);
             }
-
-            return await UpdateVersion();
         }
 
         private readonly List<(Version version, Func<Task> patch)> _patches = new List<(Version version, Func<Task> patch)>();

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Infrastructure.Authorization;
+﻿using Infrastructure.Authorization;
 using Infrastructure.Types.Const;
 
 namespace Infrastructure.Extensions

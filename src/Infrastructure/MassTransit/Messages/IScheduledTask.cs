@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infrastructure.MassTransit.Messages
+﻿namespace Infrastructure.MassTransit.Messages
 {
     public interface IScheduledTask
     {

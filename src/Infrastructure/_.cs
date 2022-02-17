@@ -1,5 +1,4 @@
-﻿using System;
-using Infrastructure.Exceptions;
+﻿using Infrastructure.Exceptions;
 
 namespace Infrastructure
 {

@@ -93,6 +93,6 @@ namespace Extensions
             if (source is not IAsyncEnumerable<TSource>)
                 return Task.FromResult(source.ToList());
             return source.ToListAsync();
-        }       
+        }
     }
 }

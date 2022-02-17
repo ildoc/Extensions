@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Infrastructure.Types.Interfaces
+﻿namespace Infrastructure.Types.Interfaces
 {
     public interface IPushNotificationMessage
     {

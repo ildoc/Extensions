@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Infrastructure.Authorization
+﻿namespace Infrastructure.Authorization
 {
     public record UserInfo
     {
