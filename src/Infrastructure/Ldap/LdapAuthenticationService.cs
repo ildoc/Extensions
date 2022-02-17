@@ -1,46 +1,35 @@
-﻿using System.DirectoryServices;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
+using Novell.Directory.Ldap;
 
 namespace Infrastructure.Ldap
 {
     public class LdapAuthenticationService : ILdapAuthenticationService
     {
-        private const string DisplayNameAttribute = "DisplayName";
-        private const string SAMAccountNameAttribute = "SAMAccountName";
         private readonly LdapSettings _settings;
 
         public LdapAuthenticationService(IOptions<LdapSettings> settings)
         {
             _settings = settings.Value;
         }
-        public LdapUser Login(string userName, string password)
+
+        public bool Login(string username, string password)
         {
+            string userDn = $"uid={username},{_settings.UserDomainName}";
             try
             {
-                using var entry = new DirectoryEntry(_settings.Path, _settings.UserDomainName + "\\" + userName, password);
-                using var searcher = new DirectorySearcher(entry);
-                searcher.Filter = String.Format("({0}={1})", SAMAccountNameAttribute, userName);
-                searcher.PropertiesToLoad.Add(DisplayNameAttribute);
-                searcher.PropertiesToLoad.Add(SAMAccountNameAttribute);
-                var result = searcher.FindOne();
-                if (result != null)
+                using (var connection = new LdapConnection { SecureSocketLayer = false })
                 {
-                    var displayName = result.Properties[DisplayNameAttribute];
-                    var samAccountName = result.Properties[SAMAccountNameAttribute];
-
-                    return new LdapUser
-                    {
-                        DisplayName = displayName == null || displayName.Count <= 0 ? null : displayName[0].ToString(),
-                        UserName = samAccountName == null || samAccountName.Count <= 0 ? null : samAccountName[0].ToString()
-                    };
+                    connection.Connect(_settings.Path, LdapConnection.DefaultPort);
+                    connection.Bind(userDn, password);
+                    if (connection.Bound)
+                        return true;
                 }
             }
-            catch (Exception ex)
+            catch (LdapException ex)
             {
-                // if we get an error, it means we have a login failure.
-                // Log specific exception
+                // Log exception
             }
-            return null;
+            return default;
         }
     }
 }

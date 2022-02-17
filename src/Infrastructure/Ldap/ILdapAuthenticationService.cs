@@ -2,6 +2,6 @@
 {
     public interface ILdapAuthenticationService
     {
-        LdapUser Login(string userName, string password);
+        bool Login(string userName, string password);
     }
 }
