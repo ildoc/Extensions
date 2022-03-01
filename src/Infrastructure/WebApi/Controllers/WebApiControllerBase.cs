@@ -9,7 +9,7 @@ namespace Infrastructure.WebApi.Controllers
     [ApiController]
     public class WebApiControllerBase : ControllerBase
     {
-        public ObjectResult Forbidden(string message) => StatusCode((int)HttpStatusCode.Forbidden, message);
-        public ObjectResult InternalServerError(string message) => StatusCode((int)HttpStatusCode.InternalServerError, message);
+        protected ObjectResult Forbidden(string message) => StatusCode((int)HttpStatusCode.Forbidden, message);
+        protected ObjectResult InternalServerError(string message) => StatusCode((int)HttpStatusCode.InternalServerError, message);
     }
 }
