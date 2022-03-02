@@ -1,10 +1,12 @@
-﻿using System.Net;
+﻿using System.Data;
+using System.Net;
+using System.Security.Authentication;
+using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Utils;
 
 namespace Infrastructure.Exceptions
 {
@@ -22,55 +24,42 @@ namespace Infrastructure.Exceptions
 
         public override void OnException(ExceptionContext context)
         {
-            var statusCode = HttpStatusCode.InternalServerError;
-            var handled = false;
+            _logger.LogError(context.Exception, context.Exception.Message);
 
-            switch (context.Exception)
+            context.HttpContext.Response.StatusCode = context.Exception switch
             {
-                case EntityNotFoundException _:
-                    statusCode = HttpStatusCode.NotFound;
-                    handled = true;
-                    break;
-                case ForbiddenActionException _:
-                    statusCode = HttpStatusCode.Forbidden;
-                    handled = true;
-                    break;
-                case ArgumentNullException _:
-                case AlreadyExistingException _:
-                case ContractsException _:
-                case BadRequestException _:
-                    statusCode = HttpStatusCode.BadRequest;
-                    handled = true;
-                    break;
-                case InternalServerErrorException _:
-                    statusCode = HttpStatusCode.InternalServerError;
-                    handled = true;
-                    break;
-                case RequestEntityTooLargeException _:
-                    statusCode = HttpStatusCode.RequestEntityTooLarge;
-                    handled = true;
-                    break;
-            }
-
+                EntityNotFoundException => (int)HttpStatusCode.NotFound,
+                UnauthorizedAccessException => (int)HttpStatusCode.Unauthorized,
+                InvalidCredentialException => (int)HttpStatusCode.Unauthorized,
+                AlreadyExistingException => (int)HttpStatusCode.BadRequest,
+                ConstraintException => (int)HttpStatusCode.BadRequest,
+                ArithmeticException => (int)HttpStatusCode.BadRequest,
+                _ => (int)HttpStatusCode.InternalServerError
+            };
             context.HttpContext.Response.ContentType = "application/json";
-            context.HttpContext.Response.StatusCode = (int)statusCode;
-            context.Result = !PrintStackTraceInResponse(handled) ?
-                new JsonResult(context.Exception.Message) :
-                new JsonResult(new { error = new[] { context.Exception.Message }, stackTrace = context.Exception.StackTrace });
-            LogException(context.Exception);
+
+            var response = _env.IsDevelopment()
+                ? new ApiError(context.HttpContext.Response.StatusCode, context.Exception.Message, context.Exception.StackTrace)
+                : new ApiError(context.HttpContext.Response.StatusCode, context.Exception.Message);
+
+            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            var json = JsonSerializer.Serialize(response, options);
+
+            context.HttpContext.Response.WriteAsync(json);
+        }
+    }
+
+    public class ApiError
+    {
+        public ApiError(int statusCode, string message = null, string details = null)
+        {
+            StatusCode = statusCode;
+            Message = message;
+            Details = details;
         }
 
-        private bool PrintStackTraceInResponse(bool handled)
-        {
-            return !handled && _env.IsDevelopment();
-        }
-
-        private void LogException(Exception exception)
-        {
-            //_logger.LogError(exception.Message, new[] { exception.Message , exception?.StackTrace });
-            _logger.LogError(exception, exception.Message);
-            if (exception.InnerException != null)
-                LogException(exception.InnerException);
-        }
+        public int StatusCode { get; set; }
+        public string Message { get; set; }
+        public string Details { get; set; }
     }
 }

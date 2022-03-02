@@ -236,15 +236,15 @@ namespace Extensions.Tests
         }
 
         [Theory]
-        [InlineData("Test","test")]
-        [InlineData("TEST","tEST")]
-        [InlineData("T","t")]
-        [InlineData("t","t")]
-        [InlineData("","")]
-        [InlineData(default,default)]
+        [InlineData("Test", "test")]
+        [InlineData("TEST", "tEST")]
+        [InlineData("T", "t")]
+        [InlineData("t", "t")]
+        [InlineData("", "")]
+        [InlineData(default, default)]
         public void ShouldLowerFirstChar(string str, string expected)
         {
-            Assert.Equal(expected,str.LowerFirstLetter());
+            Assert.Equal(expected, str.LowerFirstLetter());
         }
     }
 }
