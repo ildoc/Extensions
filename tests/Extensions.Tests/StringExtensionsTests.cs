@@ -79,37 +79,6 @@ namespace Extensions.Tests
         }
 
         [Theory]
-        [InlineData("test string", 0, "test string")]
-        [InlineData("test string", 2, "st string")]
-        public void ShouldSliceStringWithStart(string value, int start, string expected)
-        {
-            Assert.Equal(expected, value.Slice(start));
-        }
-
-        [Theory]
-        [InlineData("test string", 2, 7, "st st")]
-        [InlineData("test string", 2, -2, "st stri")]
-        public void ShouldSliceString(string value, int start, int end, string expected)
-        {
-            Assert.Equal(expected, value.Slice(start, end));
-        }
-
-        [Fact]
-        public void SliceShouldThrowExceptionIfStringIsNull()
-        {
-            string test = default;
-            var message = Assert.Throws<ArgumentException>(() => test.Slice(2, 5)).Message;
-            Assert.Equal("Cannot slice a null string", message);
-        }
-
-        [Fact]
-        public void SliceShouldThrowExceptionIfStartIsNegative()
-        {
-            var message = Assert.Throws<ArgumentException>(() => "test string".Slice(-1, 5)).Message;
-            Assert.Equal("Slice cannot have a negative start", message);
-        }
-
-        [Theory]
         [InlineData("ThisIsATestString", "This Is A Test String")]
         [InlineData("_ThisIsATestString", "This Is A Test String")]
         [InlineData("alllowercase", "alllowercase")]
@@ -250,16 +219,6 @@ namespace Extensions.Tests
         }
 
         [Theory]
-        [InlineData(default, default)]
-        [InlineData("test", "test")]
-        [InlineData("TEST", "tEST")]
-        [InlineData("Test", "test")]
-        public void ShouldLowerFirstLetter(string input, string expected)
-        {
-            Assert.Equal(expected, input.LowerFirstLetter());
-        }
-
-        [Theory]
         [InlineData(default, 0)]
         [InlineData("42", 42)]
         [InlineData("asd", 0)]
@@ -274,6 +233,18 @@ namespace Extensions.Tests
         public void ShouldRemoveCharFromString(string text1, string text2, string expected)
         {
             Assert.Equal(expected, text1.Except(text2));
+        }
+
+        [Theory]
+        [InlineData("Test","test")]
+        [InlineData("TEST","tEST")]
+        [InlineData("T","t")]
+        [InlineData("t","t")]
+        [InlineData("","")]
+        [InlineData(default,default)]
+        public void ShouldLowerFirstChar(string str, string expected)
+        {
+            Assert.Equal(expected,str.LowerFirstLetter());
         }
     }
 }

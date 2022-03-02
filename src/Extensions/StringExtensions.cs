@@ -35,23 +35,6 @@ namespace Extensions
             return IsPathRooted(path) ? path : Combine(Directory.GetCurrentDirectory(), path);
         }
 
-        public static string Slice(this string source, int start) => source.Slice(start, source.Length);
-
-        public static string Slice(this string source, int start, int end)
-        {
-            if (source == default)
-                throw new ArgumentException("Cannot slice a null string");
-            if (start < 0)
-                throw new ArgumentException("Slice cannot have a negative start");
-            if (start >= source.Length)
-                return "";
-
-            if (end < 0) // Keep this for negative end support
-                end = source.Length + end;
-            var len = end - start; // Calculate length
-            return source.Substring(start, len); // Return Substring of length
-        }
-
         public static string FromCamelCase(this string source)
         {
             if (source == default)
@@ -182,7 +165,7 @@ namespace Extensions
             if (text == default)
                 return text;
 
-            return text.Slice(0, 1).ToLower() + text.Slice(1);
+            return text[0].ToLower() + text[1..];
         }
 
         public static int ToInt32(this string text)
@@ -191,17 +174,10 @@ namespace Extensions
                 return 0;
             return Convert.ToInt32(text);
         }
+
         public static string Except(this string text1, string text2)
         {
             return text1.ToCharArray().Where(x => !text2.Contains(x)).Join("");
-        }
-
-        public static string FirstCharToLowerCase(this string str)
-        {
-            if (string.IsNullOrEmpty(str) || char.IsLower(str[0]))
-                return str;
-
-            return char.ToLower(str[0]) + str[1..];
         }
     }
 }
