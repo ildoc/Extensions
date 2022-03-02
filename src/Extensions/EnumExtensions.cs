@@ -5,12 +5,6 @@ namespace Extensions
 {
     public static class EnumExtensions
     {
-        public static T TryParse<T>(this Enum e, string s) where T : Enum
-        {
-            Enum.TryParse(e.GetType(), s, out var result);
-            return (T)result;
-        }
-
         public static string GetDescription<T>(this T enumerationValue) where T : Enum
         {
             var type = enumerationValue.GetType();
@@ -34,14 +28,6 @@ namespace Extensions
             }
             //If we have no description attribute, just return the ToString of the enum
             return enumerationValue.ToString();
-        }
-
-        public static int ToInt<T>(this T e) where T : Enum
-        {
-            if (!typeof(T).IsEnum)
-                throw new ArgumentException("T must be an enumerated type");
-
-            return (int)(IConvertible)e;
         }
     }
 }

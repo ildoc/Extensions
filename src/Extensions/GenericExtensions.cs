@@ -25,7 +25,7 @@ namespace Extensions
             return (T)result;
         }
 
-        public static T Clone<T>(this T _this) => JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(_this));
+        public static T Clone<T>(this T obj) => JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj));
 
         public static T DeepClone<T>(this T obj) where T : ISerializable
         {
