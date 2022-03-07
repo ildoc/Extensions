@@ -246,5 +246,32 @@ namespace Extensions.Tests
         {
             Assert.Equal(expected, str.LowerFirstLetter());
         }
+
+        [Theory]
+        [InlineData("This is a test", 7, "This is…")]
+        [InlineData("This is a test", 20, "This is a test")]
+        public void ShouldTruncateAt(string str, int charNum, string expected)
+        {
+            Assert.Equal(expected,str.TruncateAt(charNum));
+        }
+
+        [Fact]
+        public void ShouldThrowIfTruncateAtIsNegative()
+        {
+            var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TruncateAt(-3)).Message;
+            Assert.Equal("Length cannot be less than zero. (Parameter 'length')", message);
+        }
+
+        [Theory]
+        [InlineData("Test", "Test")]
+        [InlineData("test", "Test")]
+        [InlineData("t", "T")]
+        [InlineData("T", "T")]
+        [InlineData("", "")]
+        [InlineData(default, default)]
+        public void ShouldCapitalizeFirstChar(string str, string expected)
+        {
+            Assert.Equal(expected, str.CapitalizeFirstLetter());
+        }
     }
 }

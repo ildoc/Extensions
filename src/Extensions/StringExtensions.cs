@@ -141,8 +141,8 @@ namespace Extensions
             if (startIndex > text.Length)
                 return text;
 
-            if (length > text.Substring(startIndex).Length)
-                return text.Substring(startIndex);
+            if (length > text[startIndex..].Length)
+                return text[startIndex..];
 
             return text.Substring(startIndex, length);
         }
@@ -162,7 +162,7 @@ namespace Extensions
 
         public static string LowerFirstLetter(this string text)
         {
-            if (text == default)
+            if (text.IsNullOrEmpty())
                 return text;
 
             return text[0].ToLower() + text[1..];
@@ -178,6 +178,27 @@ namespace Extensions
         public static string Except(this string text1, string text2)
         {
             return text1.ToCharArray().Where(x => !text2.Contains(x)).Join("");
+        }
+
+        public static string TruncateAt(this string str, int length)
+        {
+            if (length >= str.Length)
+                return str;
+
+            return str[0..length] + "…";
+        }
+
+        public static string CapitalizeFirstLetter(this string text)
+        {
+            if (text.IsNullOrEmpty())
+                return text;
+
+            return text[0].ToUpper() + text[1..];
+        }
+
+        public static string ToTitleCase(this string title)
+        {
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title.ToLower());
         }
     }
 }
