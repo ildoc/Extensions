@@ -277,6 +277,8 @@ namespace Extensions.Tests
         [InlineData("test", "Test")]
         [InlineData("t", "T")]
         [InlineData("T", "T")]
+        [InlineData("multiple words", "Multiple words")]
+        [InlineData("Multiple words", "Multiple words")]
         [InlineData("", "")]
         [InlineData(default, default)]
         public void ShouldCapitalizeFirstChar(string str, string expected)
