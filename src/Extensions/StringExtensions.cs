@@ -175,6 +175,13 @@ namespace Extensions
             return Convert.ToInt32(text);
         }
 
+        public static double ToDouble(this string text)
+        {
+            if (text.IsNullOrEmpty())
+                return 0;
+            return double.TryParse(text.Replace('.', ','), out var res) ? res : 0;
+        }
+
         public static string Except(this string text1, string text2)
         {
             return text1.ToCharArray().Where(x => !text2.Contains(x)).Join("");
@@ -198,7 +205,12 @@ namespace Extensions
 
         public static string ToTitleCase(this string title)
         {
-            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title.ToLower());
+            if (title.IsNull())
+                return default;
+
+            var sanitized = Regex.Replace(title.ToLower(),"([^a-z0-9 ])",m=>$" {m.Groups[1].Value} ");
+            var tmp = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(sanitized.ToLower());
+            return Regex.Replace(tmp, "( [^a-zA-Z0-9] )", m => m.Groups[1].Value.Trim());
         }
     }
 }
