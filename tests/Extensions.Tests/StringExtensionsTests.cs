@@ -262,7 +262,7 @@ namespace Extensions.Tests
         [InlineData("This is a test", 20, "This is a test")]
         public void ShouldTruncateAt(string str, int charNum, string expected)
         {
-            Assert.Equal(expected,str.TruncateAt(charNum));
+            Assert.Equal(expected, str.TruncateAt(charNum));
         }
 
         [Fact]

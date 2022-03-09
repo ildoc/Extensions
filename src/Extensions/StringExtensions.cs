@@ -208,7 +208,7 @@ namespace Extensions
             if (title.IsNull())
                 return default;
 
-            var sanitized = Regex.Replace(title.ToLower(),"([^a-z0-9 ])",m=>$" {m.Groups[1].Value} ");
+            var sanitized = Regex.Replace(title.ToLower(), "([^a-z0-9 ])", m => $" {m.Groups[1].Value} ");
             var tmp = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(sanitized.ToLower());
             return Regex.Replace(tmp, "( [^a-zA-Z0-9] )", m => m.Groups[1].Value.Trim());
         }
