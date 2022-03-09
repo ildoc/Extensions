@@ -229,6 +229,16 @@ namespace Extensions.Tests
         }
 
         [Theory]
+        [InlineData(default, 0)]
+        [InlineData("42.1", 42.1)]
+        [InlineData("asd", 0)]
+        [InlineData("32,1", 32.1)]
+        public void ShouldConvertToDouble(string input, double expected)
+        {
+            Assert.Equal(expected, input.ToDouble());
+        }
+
+        [Theory]
         [InlineData("provaprova", "oa", "prvprv")]
         public void ShouldRemoveCharFromString(string text1, string text2, string expected)
         {
@@ -272,6 +282,22 @@ namespace Extensions.Tests
         public void ShouldCapitalizeFirstChar(string str, string expected)
         {
             Assert.Equal(expected, str.CapitalizeFirstLetter());
+        }
+
+        [Theory]
+        [InlineData("Il pianista sull'oceano", "Il Pianista Sull'Oceano")]
+        [InlineData("IL PIANISTA SULL'OCEANO", "Il Pianista Sull'Oceano")]
+        [InlineData("il pianista sull'oceano", "Il Pianista Sull'Oceano")]
+        [InlineData("titolo_con_underscore", "Titolo_Con_Underscore")]
+        [InlineData("titolo-con-trattini", "Titolo-Con-Trattini")]
+        [InlineData("titolo.con.punti", "Titolo.Con.Punti")]
+        [InlineData("iL pIaNisTa sUlL'oCeAnO", "Il Pianista Sull'Oceano")]
+        [InlineData("Il Pianista Sull'Oceano", "Il Pianista Sull'Oceano")]
+        [InlineData("", "")]
+        [InlineData(default, default)]
+        public void ShouldCapitalizeEachFirstLetter(string str, string expected)
+        {
+            Assert.Equal(expected, str.ToTitleCase());
         }
     }
 }
