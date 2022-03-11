@@ -1,12 +1,13 @@
 ﻿using Infrastructure.Types.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Settings
 {
-    public class ApplicationSettingsManager : IApplicationSettingsManager
+    public class ApplicationSettingsManager<T> : IApplicationSettingsManager where T : DbContext, IDbContextWithSettings
     {
-        private readonly IDbContextWithSettings _context;
+        private readonly T _context;
 
-        public ApplicationSettingsManager(IDbContextWithSettings context)
+        public ApplicationSettingsManager(T context)
         {
             _context = context;
         }
