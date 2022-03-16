@@ -20,7 +20,6 @@
         /// Checks if a char is [a-zA-Z]
         /// </summary>
         /// <param name="ch"></param>
-        /// <returns></returns>
         public static bool IsAsciiAlphabetLetter(this char ch) =>
             (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
     }
