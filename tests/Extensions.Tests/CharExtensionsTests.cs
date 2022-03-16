@@ -26,5 +26,14 @@ namespace Extensions.Tests
         {
             Assert.Equal(expected, value.ToLower());
         }
+
+        [Theory]
+        [InlineData('A', true)]
+        [InlineData('a', true)]
+        [InlineData(' ', false)]
+        public void ShouldReturnIfIsAlphabet(char value, bool expected)
+        {
+            Assert.Equal(expected, value.IsAsciiAlphabetLetter());
+        }
     }
 }
