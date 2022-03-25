@@ -8,16 +8,18 @@ namespace Extensions.Tests
 {
     public class StringExtensionsTests
     {
-        private enum TestEnum
+        public enum TestEnum
         {
             ValueA,
             ValueB
         }
 
-        [Fact]
-        public void EnumStringShouldResolveToEnum()
+        [Theory]
+        [InlineData(TestEnum.ValueA, "ValueA")]
+        [InlineData(default, default)]
+        public void EnumStringShouldResolveToEnum(TestEnum expected, string value)
         {
-            Assert.Equal(TestEnum.ValueA, "ValueA".ToEnum<TestEnum>());
+            Assert.Equal(expected, value.ToEnum<TestEnum>());
         }
 
         [Fact]
@@ -64,10 +66,17 @@ namespace Extensions.Tests
         }
 
         [Fact]
-        public void ShouldReturnAbsolutePath()
+        public void ShouldReturnAbsolutePathIfRelative()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Test");
             Assert.Equal(path, "Test".Absolutize());
+        }
+
+        [Fact]
+        public void ShouldReturnAbsolutePathIfAlreadyAbsolute()
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Test");
+            Assert.Equal(path, path.Absolutize());
         }
 
         [Fact]
@@ -116,12 +125,6 @@ namespace Extensions.Tests
             Assert.Equal(expected, value.IsNullOrEmpty());
         }
 
-        [Fact]
-        public void IsNullOrEmptyShouldReturnTrueWithStringEmpty()
-        {
-            Assert.True(string.Empty.IsNullOrEmpty());
-        }
-
         [Theory]
         [InlineData(default, true)]
         [InlineData("string", false)]
@@ -135,7 +138,7 @@ namespace Extensions.Tests
         [Fact]
         public void IsNullOrWhiteSpaceShouldReturnTrueWithStringEmpty()
         {
-            Assert.True(string.Empty.IsNullOrEmpty());
+            Assert.True(string.Empty.IsNullOrWhiteSpace());
         }
 
         [Theory]
@@ -270,6 +273,21 @@ namespace Extensions.Tests
         {
             var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TruncateAt(-3)).Message;
             Assert.Equal("Length cannot be less than zero. (Parameter 'length')", message);
+        }
+
+        [Fact]
+        public void ShouldTransformTemplate()
+        {
+            var o = new
+            {
+                Name = "Pino",
+                Surname = "Cammino",
+                Phrase = "Come una catapulta!"
+            };
+            var template = "{{Name}} {{Surname}} ha detto '{{Phrase}}'";
+            var expected = "Pino Cammino ha detto 'Come una catapulta!'";
+
+            Assert.Equal(expected, template.TransformTemplate(o));
         }
 
         [Theory]
