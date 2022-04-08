@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infrastructure.Types.Base
 {
-    public abstract class BaseIdentityDbContext<T> : IdentityDbContext<T> where T : IdentityUser
+    public abstract class BaseIdentityDbContext<TUser> : IdentityDbContext<TUser> where TUser : IdentityUser
     {
         protected BaseIdentityDbContext(DbContextOptions options) : base(options) { }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await SaveChangesAsync(null, cancellationToken);
 
-        public async Task<int> SaveChangesAsync(T user, CancellationToken cancellationToken = default)
+        public async Task<int> SaveChangesAsync(TUser user, CancellationToken cancellationToken = default)
         {
             AddCreationAndModifiedDate(user);
             return await base.SaveChangesAsync(cancellationToken);
@@ -20,13 +20,13 @@ namespace Infrastructure.Types.Base
 
         public override int SaveChanges() => SaveChanges(null);
 
-        public int SaveChanges(T user)
+        public int SaveChanges(TUser user)
         {
             AddCreationAndModifiedDate(user);
             return base.SaveChanges();
         }
 
-        private void AddCreationAndModifiedDate(T user)
+        private void AddCreationAndModifiedDate(TUser user)
         {
             var addedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Added).ToList();
 
