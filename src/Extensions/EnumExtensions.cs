@@ -8,10 +8,6 @@ namespace Extensions
         public static string GetDescription<T>(this T enumerationValue) where T : Enum
         {
             var type = enumerationValue.GetType();
-            if (!type.IsEnum)
-            {
-                throw new ArgumentException("EnumerationValue must be of Enum type", nameof(enumerationValue));
-            }
 
             //Tries to find a DescriptionAttribute for a potential friendly name
             //for the enum

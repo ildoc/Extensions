@@ -187,12 +187,12 @@ namespace Extensions
             return text1.ToCharArray().Where(x => !text2.Contains(x)).Join("");
         }
 
-        public static string TruncateAt(this string str, int length)
+        public static string TruncateAt(this string str, int length, bool addEllipsis = false)
         {
             if (length >= str.Length)
                 return str;
 
-            return str[0..length] + "…";
+            return str[0..length] + (addEllipsis ? "…" : "");
         }
 
         public static string CapitalizeFirstLetter(this string text)

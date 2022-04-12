@@ -263,7 +263,15 @@ namespace Extensions.Tests
         [Theory]
         [InlineData("This is a test", 7, "This is…")]
         [InlineData("This is a test", 20, "This is a test")]
-        public void ShouldTruncateAt(string str, int charNum, string expected)
+        public void ShouldTruncateAtWithEllipsis(string str, int charNum, string expected)
+        {
+            Assert.Equal(expected, str.TruncateAt(charNum, true));
+        }
+
+        [Theory]
+        [InlineData("This is a test", 7, "This is")]
+        [InlineData("This is a test", 20, "This is a test")]
+        public void ShouldTruncateAtWithoutEllipsis(string str, int charNum, string expected)
         {
             Assert.Equal(expected, str.TruncateAt(charNum));
         }
