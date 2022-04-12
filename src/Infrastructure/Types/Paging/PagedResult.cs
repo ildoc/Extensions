@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Types.Paging
 {
-    public class PagedResult<T> //: PagedResultBase
+    public class PagedResult<T>
     {
         public IEnumerable<T> Items { get; }
         public int TotalItems { get; }
