@@ -41,6 +41,7 @@ namespace Extensions.Tests
         [Fact]
         public void ShouldReturnDefaultIfValueDontExists()
         {
+            Assert.Equal("ddd", _dict.GetValueOrDefault(4));
             Assert.Equal(default, _dict.GetValueOrDefault(5));
         }
 
@@ -57,6 +58,19 @@ namespace Extensions.Tests
             var str = "";
             _dict.Each(x => str += x.Value);
             Assert.Equal("aaabbbcccddd", str);
+        }
+
+        [Fact]
+        public void ShouldConvertToDictionary()
+        {
+            IEnumerable<KeyValuePair<int, string>> list = new List<KeyValuePair<int, string>> {
+                new KeyValuePair<int, string>(1,"aaa"),
+                new KeyValuePair<int, string>(2,"bbb"),
+                new KeyValuePair<int, string>(3,"ccc"),
+                new KeyValuePair<int, string>(4,"ddd"),
+            };
+
+            Assert.Equal(_dict, list.ToDictionary());
         }
     }
 }
