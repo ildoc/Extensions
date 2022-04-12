@@ -11,4 +11,9 @@ namespace Infrastructure.Types.Paging
         public SortingOptions SortingOptions { get; set; }
         public string FilterValue { get; set; }
     }
+
+    public class PagingOptions<T> : PagingOptions
+    {
+        public T SearchOptions { get; set; }
+    }
 }
