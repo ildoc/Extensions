@@ -337,5 +337,33 @@ namespace Extensions.Tests
         {
             Assert.Equal(expected, str.Reverse());
         }
+
+        [Theory]
+        [InlineData(default, 3, default)]
+        [InlineData("", 3, "")]
+        [InlineData("#", 3, "###")]
+        [InlineData("-", 5, "-----")]
+        public void ShouldRepeatString(string str, int times, string expected)
+        {
+            Assert.Equal(expected, str.Repeat(times));
+        }
+
+        [Theory]
+        [InlineData(default, "_", default)]
+        [InlineData("noprefix", "_", "_noprefix")]
+        [InlineData("_withprefix", "_", "_withprefix")]
+        public void ShouldEnsureStringStartsWith(string str, string value, string expected)
+        {
+            Assert.Equal(expected, str.EnsureStartsWith(value));
+        }
+
+        [Theory]
+        [InlineData(default, "/", default)]
+        [InlineData("https://ildoc.dev", "/", "https://ildoc.dev/")]
+        [InlineData("https://ildoc.dev/", "/", "https://ildoc.dev/")]
+        public void ShouldEnsureStringEndsWith(string str, string value, string expected)
+        {
+            Assert.Equal(expected, str.EnsureEndsWith(value));
+        }
     }
 }

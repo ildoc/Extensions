@@ -53,5 +53,27 @@ namespace Extensions
         /// <returns></returns>
         public static DateTime ToSimpleDateTime(this DateTime dt) =>
             new(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, DateTimeKind.Unspecified);
+
+        /// <summary>
+        /// Add "working day" to a date, where working day means from Monday to Friday.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="days">Number of days to add</param>
+        /// <returns></returns>
+        public static DateTime AddWorkDays(this DateTime d, int days)
+        {
+            for (var i = 0; i < days; ++i)
+            {
+                if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    d = d.AddDays(1.0);
+                    days++;
+                    continue;
+                }
+
+                d = d.AddDays(1.0);
+            }
+            return d;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Utils
+namespace Extensions.Types
 {
     public class KeyEqualityComparer<T> : IEqualityComparer<T>
     {

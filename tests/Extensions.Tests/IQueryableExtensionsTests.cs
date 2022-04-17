@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Utils.Enums;
+using Extensions.Enums;
 using Xunit;
 
 namespace Extensions.Tests

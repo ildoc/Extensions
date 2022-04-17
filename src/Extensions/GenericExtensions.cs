@@ -58,6 +58,22 @@ namespace Extensions
         }
 #nullable disable
 
+        public static bool Between<T>(this T item, T start, T end, bool includeStart = true, bool includeEnd = true)
+        {
+            return
+                (
+                    (includeStart && Comparer<T>.Default.Compare(item, start) >= 0)
+                    ||
+                    (!includeStart && Comparer<T>.Default.Compare(item, start) > 0)
+                )
+                &&
+                (
+                    (includeEnd && Comparer<T>.Default.Compare(item, end) <= 0)
+                    ||
+                    (!includeEnd && Comparer<T>.Default.Compare(item, end) < 0)
+                );
+        }
+
         public static List<Variance> DetailedCompare<T>(this T val1, T val2)
         {
             var variances = new List<Variance>();
