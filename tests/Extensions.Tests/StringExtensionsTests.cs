@@ -327,5 +327,15 @@ namespace Extensions.Tests
         {
             Assert.Equal(expected, str.ToTitleCase());
         }
+
+        [Theory]
+        [InlineData("", "")]
+        [InlineData("c", "c")]
+        [InlineData("ciao", "oaic")]
+        [InlineData(default, default)]
+        public void ShouldReverseString(string str, string expected)
+        {
+            Assert.Equal(expected, str.Reverse());
+        }
     }
 }
