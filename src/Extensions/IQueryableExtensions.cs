@@ -54,10 +54,10 @@ namespace Extensions
         }
 
         public static IQueryable<T> WhereIf<T>(this IQueryable<T> querable, bool condition, Expression<Func<T, bool>> f) =>
-            condition ? querable.Where(f).AsQueryable() : querable;
+            condition ? querable.Where(f) : querable;
 
         public static IQueryable<T> WhereIfElse<T>(this IQueryable<T> querable, bool condition, Expression<Func<T, bool>> @if, Expression<Func<T, bool>> @else) =>
-            condition ? querable.Where(@if).AsQueryable() : querable.Where(@else).AsQueryable();
+            condition ? querable.Where(@if) : querable.Where(@else);
 
         public static IQueryable<T> AsNoTrackingIf<T>(this IQueryable<T> querable, bool condition) where T : class =>
             condition ? querable.AsNoTracking() : querable;
