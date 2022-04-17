@@ -9,9 +9,32 @@ namespace Extensions
 {
     public static class IEnumerableExtensions
     {
-        //public static void Each<T>(this IEnumerable<T> source, Action<T> action) => For.Each(source, action);
+        [DebuggerStepThrough]
+        public static void Each<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (var item in source)
+                action(item);
+        }
 
-        //public static void Each<T>(this IEnumerable source, Action<T> action) => For.Each(source, action);
+        /// <summary>
+        ///     For shortcut, no side effects
+        /// </summary>
+        [DebuggerStepThrough]
+        public static void Each<T>(this IEnumerable source, Action<T> action)
+        {
+            foreach (var item in source)
+                action((T)item);
+        }
+
+        /// <summary>
+        ///     For shortcut with index, no side effects
+        /// </summary>
+        [DebuggerStepThrough]
+        public static void EachIndex<T>(this IEnumerable<T> source, Action<T, int> action)
+        {
+            var i = 0;
+            Each(source, item => action(item, i++));
+        }
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> list, IEnumerable<T> except, Func<T, T, bool> comparer) =>
             list.Except(except, new KeyEqualityComparer<T>(comparer));
@@ -80,33 +103,6 @@ namespace Extensions
             }
 
             return true;
-        }
-
-        [DebuggerStepThrough]
-        public static void Each<T>(this IEnumerable<T> source, Action<T> action)
-        {
-            foreach (var item in source)
-                action(item);
-        }
-
-        /// <summary>
-        ///     For shortcut, no side effects
-        /// </summary>
-        [DebuggerStepThrough]
-        public static void Each<T>(this IEnumerable source, Action<T> action)
-        {
-            foreach (var item in source)
-                action((T)item);
-        }
-
-        /// <summary>
-        ///     For shortcut with index, no side effects
-        /// </summary>
-        [DebuggerStepThrough]
-        public static void EachIndex<T>(this IEnumerable<T> source, Action<T, int> action)
-        {
-            var i = 0;
-            Each(source, item => action(item, i++));
         }
     }
 }
