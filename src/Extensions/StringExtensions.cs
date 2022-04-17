@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Utils.Enums;
+using Extensions.Enums;
 using static System.IO.Path;
 
 namespace Extensions
@@ -53,6 +53,12 @@ namespace Extensions
             return returnValue;
         }
 
+        /// <summary>
+        /// Replace a string with another string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="newValue"></param>
+        /// <returns>The replaced string</returns>
         public static string ReplaceWith(this string value, string newValue) =>
             newValue.IsNullOrEmpty() ? value : newValue;
 
@@ -214,6 +220,46 @@ namespace Extensions
             var sanitized = Regex.Replace(title.ToLower(), "([^a-z0-9 ])", m => $" {m.Groups[1].Value} ");
             var tmp = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(sanitized.ToLower());
             return Regex.Replace(tmp, "( [^a-zA-Z0-9] )", m => m.Groups[1].Value.Trim());
+        }
+
+        /// <summary>
+        /// 	Ensures that a string ends with a given suffix.
+        /// </summary>
+        /// <param name = "value">The string value to check.</param>
+        /// <param name = "suffix">The suffix value to check for.</param>
+        /// <returns>The string value including the suffix</returns>
+        public static string EnsureEndsWith(this string value, string suffix)
+        {
+            return value?.EndsWith(suffix)==true ? value : value?.Insert(value.Length, suffix);
+        }
+
+        /// <summary>
+        /// 	Ensures that a string starts with a given prefix.
+        /// </summary>
+        /// <param name = "value">The string value to check.</param>
+        /// <param name = "prefix">The prefix value to check for.</param>
+        /// <returns>The string value including the prefix</returns>
+        public static string EnsureStartsWith(this string value, string prefix)
+        {
+            return value?.StartsWith(prefix) ==true ? value : value?.Insert(0, prefix);
+        }
+
+        /// <summary>
+        /// Repeat a string n times
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="times">Times to be repeated</param>
+        /// <returns>The string repeated n times</returns>
+        public static string Repeat(this string str, int times)
+        {
+            var result = "";
+
+            if (str == default)
+                return default;
+
+            for (var i = 0; i < times; i++)
+                result += str;
+            return result;
         }
     }
 }

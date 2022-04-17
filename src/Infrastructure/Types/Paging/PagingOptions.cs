@@ -1,4 +1,4 @@
-﻿using Utils.Enums;
+﻿using Extensions.Enums;
 
 namespace Infrastructure.Types.Paging
 {

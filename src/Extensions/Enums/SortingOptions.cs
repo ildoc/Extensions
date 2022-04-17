@@ -1,4 +1,4 @@
-﻿namespace Utils.Enums
+﻿namespace Extensions.Enums
 {
     public enum SortingOptions
     {
