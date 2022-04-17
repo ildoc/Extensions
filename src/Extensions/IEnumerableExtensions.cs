@@ -16,15 +16,20 @@ namespace Extensions
             list.Except(except, new KeyEqualityComparer<T>(comparer));
 
         public static string Join<T>(this IEnumerable<T> source, char separator) => string.Join(separator, source);
-        public static string Join<T>(this IEnumerable<T> source, string separator) => string.Join(separator, source);
 
-        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> enumerable, bool condition, Func<T, bool> f) =>
-           condition ? enumerable.Where(f) : enumerable;
+        public static string Join<T>(this IEnumerable<T> source, string separator) => string.Join(separator, source);
 
         public static IEnumerable<T> ConcatIf<T>(this IEnumerable<T> enumerable, bool condition, IEnumerable<T> otherEnumerable) =>
            condition ? enumerable.Concat(otherEnumerable) : enumerable;
 
         public static IEnumerable<T> ConcatIfElse<T>(this IEnumerable<T> enumerable, bool condition, IEnumerable<T> ifEnumerable, IEnumerable<T> elseEnumerable) =>
            condition ? enumerable.Concat(ifEnumerable) : enumerable.Concat(elseEnumerable);
+
+        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> enumerable, bool condition, Func<T, bool> f) =>
+            condition ? enumerable.Where(f) : enumerable;
+
+        public static IEnumerable<T> WhereIfElse<T>(this IEnumerable<T> enumerable, bool condition, Func<T, bool> @if, Func<T, bool> @else) =>
+            condition ? enumerable.Where(@if) : enumerable.Where(@else);
+
     }
 }
