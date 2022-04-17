@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Utils.Enums;
 using static System.IO.Path;
 
@@ -177,6 +178,8 @@ namespace Extensions
 
         public static double ToDouble(this string text)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT");
+
             if (text.IsNullOrEmpty())
                 return 0;
             return double.TryParse(text.Replace('.', ','), out var res) ? res : 0;
