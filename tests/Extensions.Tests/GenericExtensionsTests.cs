@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 namespace Extensions.Tests
@@ -116,9 +117,22 @@ namespace Extensions.Tests
 
             var casted = anon.AnonymousCastTo<TestClass>();
 
-            Assert.Equal(casted.Id, anon.Id);
-            Assert.Equal(casted.Description, anon.Description);
-            Assert.Equal(casted.TimeStamp, anon.TimeStamp);
+            casted.Should().BeEquivalentTo(anon);
+        }
+
+        [Fact]
+        public void ShouldClone()
+        {
+            var a = new TestClass
+            {
+                Id = 7,
+                Description = "test",
+                TimeStamp = DateTime.Now
+            };
+
+            var b = a.Clone();
+
+            b.Should().BeEquivalentTo(a);
         }
 
         [Theory]

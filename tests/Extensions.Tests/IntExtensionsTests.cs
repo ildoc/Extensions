@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using FluentAssertions;
+using Xunit;
 
 namespace Extensions.Tests
 {
@@ -11,7 +12,7 @@ namespace Extensions.Tests
 
             3.Times(() => count++);
 
-            Assert.Equal(3, count);
+            count.Should().Be(3);
         }
     }
 }

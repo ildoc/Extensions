@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 namespace Extensions.Tests
@@ -13,8 +14,9 @@ namespace Extensions.Tests
             list.AddIf(_ => true, "Fizz"); // Add "Fizz" value
             list.AddIf(_ => false, "Buzz"); // Doesn't add "Buzz" value
 
-            Assert.Contains("Fizz", list);
-            Assert.DoesNotContain("Buzz", list);
+
+            list.Should().Contain("Fizz");
+            list.Should().NotContain("Buzz");
         }
 
         [Fact]
@@ -28,7 +30,7 @@ namespace Extensions.Tests
             list.AddIfNotContains("FizzExisting"); // Doesn't add "FizzExisting" value, the Collection already contains it.
 
             // Unit Test
-            Assert.Equal(2, list.Count);
+            list.Count.Should().Be(2);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using FluentAssertions;
 using Xunit;
 
 namespace Extensions.Tests
@@ -20,7 +20,7 @@ namespace Extensions.Tests
         [InlineData(TestEnum.ValueB, "ValueB")]
         public void ShouldGetDescription(TestEnum testEnumValue, string expected)
         {
-            Assert.Equal(expected, testEnumValue.GetDescription());
+            testEnumValue.GetDescription().Should().Be(expected);
         }
     }
 }
