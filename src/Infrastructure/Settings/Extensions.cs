@@ -6,7 +6,7 @@ namespace Infrastructure.Settings
 {
     public static class Extensions
     {
-        public static IServiceCollection AddApplicationSettings<T>(this IServiceCollection services) where T:DbContext, IDbContextWithSettings
+        public static IServiceCollection AddApplicationSettings<T>(this IServiceCollection services) where T : DbContext, IDbContextWithSettings
         {
             services.AddTransient<IApplicationSettingsManager, ApplicationSettingsManager<T>>();
 

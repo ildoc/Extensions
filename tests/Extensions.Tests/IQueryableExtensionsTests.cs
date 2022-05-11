@@ -15,9 +15,9 @@ namespace Extensions.Tests
 
         private readonly IQueryable<TestItem> _items = new List<TestItem> {
             new TestItem{ Id = 1, Name = "aaa"},
-            new TestItem{ Id = 2, Name ="bbb"},
-            new TestItem{ Id = 3, Name ="ccc"},
-            new TestItem{ Id=4, Name="ddd"}
+            new TestItem{ Id = 2, Name = "bbb"},
+            new TestItem{ Id = 3, Name = "ccc"},
+            new TestItem{ Id = 4, Name = "ddd"}
         }.AsQueryable();
 
         [Theory]

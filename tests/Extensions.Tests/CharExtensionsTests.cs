@@ -1,16 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using Xunit;
 
 namespace Extensions.Tests
 {
     public class CharExtensionsTests
     {
         [Theory]
-        [InlineData('a','A')]
-        [InlineData('A','A')]
-        [InlineData(' ',' ')]
+        [InlineData('a', 'A')]
+        [InlineData('A', 'A')]
+        [InlineData(' ', ' ')]
         public void ShouldTransformToUppercase(char value, char expected)
         {
             Assert.Equal(expected, value.ToUpper());

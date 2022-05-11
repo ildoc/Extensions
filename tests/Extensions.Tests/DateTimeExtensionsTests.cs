@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Xunit;
 
 namespace Extensions.Tests
@@ -25,7 +26,8 @@ namespace Extensions.Tests
         public void ShouldCalculateAgeOnSpecificDate()
         {
             var birthday = new DateTime(1990, 6, 22);
-            Assert.Equal(31, birthday.ToAgeAtDate(new DateTime(2022, 4, 12)));
+
+            birthday.ToAgeAtDate(new DateTime(2022, 4, 12)).Should().Be(31);
         }
     }
 }

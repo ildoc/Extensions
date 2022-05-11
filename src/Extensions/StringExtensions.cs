@@ -230,7 +230,7 @@ namespace Extensions
         /// <returns>The string value including the suffix</returns>
         public static string EnsureEndsWith(this string value, string suffix)
         {
-            return value?.EndsWith(suffix)==true ? value : value?.Insert(value.Length, suffix);
+            return value?.EndsWith(suffix) == true ? value : value?.Insert(value.Length, suffix);
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace Extensions
         /// <returns>The string value including the prefix</returns>
         public static string EnsureStartsWith(this string value, string prefix)
         {
-            return value?.StartsWith(prefix) ==true ? value : value?.Insert(0, prefix);
+            return value?.StartsWith(prefix) == true ? value : value?.Insert(0, prefix);
         }
 
         /// <summary>
