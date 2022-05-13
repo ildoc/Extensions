@@ -10,9 +10,9 @@ namespace Extensions.Tests
         [Theory]
         [InlineData(true, true)]
         [InlineData(false, false)]
-        public void BoolShouldResolveAsBool(bool value, bool expectedValue)
+        public void BoolShouldResolveAsBool(bool value, bool expected)
         {
-            Assert.Equal(expectedValue, value.ToBool());
+            value.ToBool().Should().Be(expected);
         }
 
         [Theory]
@@ -20,9 +20,9 @@ namespace Extensions.Tests
         [InlineData(default, false)]
         [InlineData(7, true)]
         [InlineData(-7, true)]
-        public void IntShouldResolveAsBool(int? value, bool expectedValue)
+        public void IntShouldResolveAsBool(int? value, bool expected)
         {
-            Assert.Equal(expectedValue, value.ToBool());
+            value.ToBool().Should().Be(expected);
         }
 
         [Theory]
@@ -30,9 +30,9 @@ namespace Extensions.Tests
         [InlineData(default, false)]
         [InlineData("true", true)]
         [InlineData("asd", false)]
-        public void StringShouldResolveAsBool(string value, bool expectedValue)
+        public void StringShouldResolveAsBool(string value, bool expected)
         {
-            Assert.Equal(expectedValue, value.ToBool());
+            value.ToBool().Should().Be(expected);
         }
 
         [Theory]
@@ -40,9 +40,9 @@ namespace Extensions.Tests
         [InlineData(default, false)]
         [InlineData(7f, true)]
         [InlineData(-7f, true)]
-        public void FloatShouldResolveAsBool(float? value, bool expectedValue)
+        public void FloatShouldResolveAsBool(float? value, bool expected)
         {
-            Assert.Equal(expectedValue, value.ToBool());
+            value.ToBool().Should().Be(expected);
         }
 
         [Theory]
@@ -50,15 +50,15 @@ namespace Extensions.Tests
         [InlineData(default, false)]
         [InlineData(7.0, true)]
         [InlineData(-7.0, true)]
-        public void DoubleShouldResolveAsBool(double? value, bool expectedValue)
+        public void DoubleShouldResolveAsBool(double? value, bool expected)
         {
-            Assert.Equal(expectedValue, value.ToBool());
+            value.ToBool().Should().Be(expected);
         }
 
         [Fact]
         public void ObjectShouldResolveAsTrue()
         {
-            Assert.True(new { Id = 7 }.ToBool());
+            new { Id = 7 }.ToBool().Should().BeTrue();
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace Extensions.Tests
         {
             object value = null;
 
-            Assert.False(value.ToBool());
+            value.ToBool().Should().BeFalse();
         }
 
         [Theory]
@@ -74,7 +74,7 @@ namespace Extensions.Tests
         [InlineData('f', "abcd", false)]
         public void ShouldCheckIfValueIsInString(char value, string fullString, bool expected)
         {
-            Assert.Equal(expected, value.IsIn(fullString));
+            value.IsIn(fullString).Should().Be(expected);
         }
 
         [Theory]
@@ -82,7 +82,7 @@ namespace Extensions.Tests
         [InlineData('f', "abcd", true)]
         public void ShouldCheckIfValueIsNotInString(char value, string fullString, bool expected)
         {
-            Assert.Equal(expected, value.IsNotIn(fullString));
+            value.IsNotIn(fullString).Should().Be(expected);
         }
 
         [Fact]
@@ -91,8 +91,8 @@ namespace Extensions.Tests
             var value = "test";
             var strings = new List<string> { "this", "is", "a", "test" };
 
-            Assert.True(value.IsIn(strings));
-            Assert.False(value.IsNotIn(strings));
+            value.IsIn(strings).Should().BeTrue();
+            value.IsNotIn(strings).Should().BeFalse();
         }
 
         [Fact]
@@ -101,8 +101,8 @@ namespace Extensions.Tests
             var value = "not";
             var strings = new List<string> { "this", "is", "a", "test" };
 
-            Assert.False(value.IsIn(strings));
-            Assert.True(value.IsNotIn(strings));
+            value.IsIn(strings).Should().BeFalse();
+            value.IsNotIn(strings).Should().BeTrue();
         }
 
         [Fact]
@@ -143,7 +143,7 @@ namespace Extensions.Tests
         [InlineData("asd", "asd", true)]
         public void ShouldReturnEqual(object a, object b, bool expected)
         {
-            Assert.Equal(expected, a.IsEqualTo(b));
+            a.IsEqualTo(b).Should().Be(expected);
         }
 
         private class TestClass
