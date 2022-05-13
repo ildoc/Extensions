@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FluentAssertions;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using Xunit;
 
@@ -14,42 +15,43 @@ namespace Extensions.Tests
             var str = "";
 
             _dict.RemoveAllWithAction(x => x.Key >= 3, x => str += x.Value);
-            Assert.Equal(2, _dict.Count);
-            Assert.Equal("cccddd", str);
+
+            _dict.Should().HaveCount(2);
+            str.Should().Be("cccddd");
         }
 
         [Fact]
         public void ShouldRemoveItemsWhere()
         {
             _dict.RemoveAll(x => x.Key >= 3);
-            Assert.Equal(2, _dict.Count);
+            _dict.Count.Should().Be(2);
         }
 
         [Fact]
         public void ShouldTryGetValueIfExists()
         {
-            Assert.Equal("bbb", _dict.GetValue(2));
+            _dict.GetValue(2).Should().Be("bbb");
         }
 
         [Fact]
         public void ShouldThrowIfValueDontExists()
         {
             var message = Assert.Throws<KeyNotFoundException>(() => _dict.GetValue(5)).Message;
-            Assert.Equal("'5' not found in Dictionary", message);
+            message.Should().Be("'5' not found in Dictionary");
         }
 
         [Fact]
         public void ShouldReturnDefaultIfValueDontExists()
         {
-            Assert.Equal("ddd", _dict.GetValueOrDefault(4));
-            Assert.Equal(default, _dict.GetValueOrDefault(5));
+            _dict.GetValueOrDefault(4).Should().Be("ddd");
+            _dict.GetValueOrDefault(5).Should().Be(default);
         }
 
         [Fact]
         public void ShouldSwapKeyValues()
         {
             var outputdict = new Dictionary<string, int> { { "aaa", 1 }, { "bbb", 2 }, { "ccc", 3 }, { "ddd", 4 } };
-            Assert.Equal(outputdict, _dict.SwapKeyValue());
+            _dict.SwapKeyValue().Should().BeEquivalentTo(outputdict);
         }
 
         [Fact]
@@ -57,7 +59,8 @@ namespace Extensions.Tests
         {
             var str = "";
             _dict.Each(x => str += x.Value);
-            Assert.Equal("aaabbbcccddd", str);
+
+            str.Should().Be("aaabbbcccddd");
         }
 
         [Fact]
@@ -70,7 +73,7 @@ namespace Extensions.Tests
                 new KeyValuePair<int, string>(4,"ddd"),
             };
 
-            Assert.Equal(_dict, list.ToDictionary());
+            list.ToDictionary().Should().BeEquivalentTo(_dict);
         }
     }
 }

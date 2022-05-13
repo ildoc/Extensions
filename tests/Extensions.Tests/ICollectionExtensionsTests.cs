@@ -30,7 +30,7 @@ namespace Extensions.Tests
             list.AddIfNotContains("FizzExisting"); // Doesn't add "FizzExisting" value, the Collection already contains it.
 
             // Unit Test
-            list.Count.Should().Be(2);
+            list.Should().HaveCount(2);
         }
     }
 }
