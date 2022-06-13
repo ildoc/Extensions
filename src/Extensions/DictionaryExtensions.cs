@@ -35,5 +35,12 @@ namespace Extensions
 
         public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> dict) =>
             dict.ToDictionary(x => x.Key, x => x.Value);
+
+        public static void AddIfNotDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
+            where TValue : class
+        {
+            if (value != default)
+                dictionary.Add(key, value);
+        }
     }
 }
