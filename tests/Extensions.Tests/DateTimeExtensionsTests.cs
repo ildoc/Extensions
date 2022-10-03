@@ -30,4 +30,20 @@ namespace Extensions.Tests
             birthday.ToAgeAtDate(new DateTime(2022, 4, 12)).Should().Be(31);
         }
     }
+
+    public class ObjectExtensionsTests
+    {
+        [Theory]
+        [InlineData(false, false)]
+        [InlineData(null, false)]
+        [InlineData("lallallero", false)]
+        [InlineData(123, true)]
+        [InlineData(1.3, true)]
+        [InlineData(-123, true)]
+        [InlineData(-1.3, true)]
+        public void ShouldCheckIfNumber(object o, bool expected)
+        {
+            o.IsNumber().Should().Be(expected);
+        }
+    }
 }
