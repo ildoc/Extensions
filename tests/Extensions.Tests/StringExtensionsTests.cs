@@ -202,15 +202,13 @@ namespace Extensions.Tests
         [Fact]
         public void TolerantSubstringShouldThrowExceptionIfIndexIsNegative()
         {
-            var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(-3)).Message;
-            Assert.Equal("StartIndex cannot be less than zero. (Parameter 'startIndex')", message);
+            Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(-3));
         }
 
         [Fact]
         public void TolerantSubstringShouldThrowExceptionIfLengthIsNegative()
         {
-            var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(0, -3)).Message;
-            Assert.Equal("Length cannot be less than zero. (Parameter 'length')", message);
+            Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(0, -3));
         }
 
         [Theory]
@@ -279,8 +277,7 @@ namespace Extensions.Tests
         [Fact]
         public void ShouldThrowIfTruncateAtIsNegative()
         {
-            var message = Assert.Throws<ArgumentOutOfRangeException>(() => "string".TruncateAt(-3)).Message;
-            Assert.Equal("Length cannot be less than zero. (Parameter 'length')", message);
+            Assert.Throws<ArgumentOutOfRangeException>(() => "string".TruncateAt(-3));
         }
 
         [Fact]

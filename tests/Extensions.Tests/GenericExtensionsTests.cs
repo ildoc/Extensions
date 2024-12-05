@@ -36,7 +36,7 @@ namespace Extensions.Tests
         }
 
         [Theory]
-        [InlineData(0, false)]
+        [InlineData(0f, false)]
         [InlineData(default, false)]
         [InlineData(7f, true)]
         [InlineData(-7f, true)]
@@ -46,7 +46,7 @@ namespace Extensions.Tests
         }
 
         [Theory]
-        [InlineData(0, false)]
+        [InlineData(0.0, false)]
         [InlineData(default, false)]
         [InlineData(7.0, true)]
         [InlineData(-7.0, true)]
