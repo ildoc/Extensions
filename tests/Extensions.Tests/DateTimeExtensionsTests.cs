@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace Extensions.Tests
@@ -11,7 +11,7 @@ namespace Extensions.Tests
         {
             var date = DateTime.Now;
 
-            Assert.True(date.DayStart().AddMilliseconds(-1).Date == date.AddDays(-1).Date);
+            date.DayStart().AddMilliseconds(-1).Date.ShouldBe(date.AddDays(-1).Date);
         }
 
         [Fact]
@@ -19,7 +19,7 @@ namespace Extensions.Tests
         {
             var date = DateTime.Now;
 
-            Assert.True(date.DayEnd().AddMilliseconds(1).Date == date.AddDays(1).Date);
+            date.DayEnd().AddMilliseconds(1).Date.ShouldBe(date.AddDays(1).Date);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Extensions.Tests
         {
             var birthday = new DateTime(1990, 6, 22);
 
-            birthday.ToAgeAtDate(new DateTime(2022, 4, 12)).Should().Be(31);
+            birthday.ToAgeAtDate(new DateTime(2022, 4, 12)).ShouldBe(31);
         }
     }
 
@@ -43,7 +43,7 @@ namespace Extensions.Tests
         [InlineData(-1.3, true)]
         public void ShouldCheckIfNumber(object o, bool expected)
         {
-            o.IsNumber().Should().Be(expected);
+            o.IsNumber().ShouldBe(expected);
         }
     }
 }

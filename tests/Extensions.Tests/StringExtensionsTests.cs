@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using Shouldly;
 using Xunit;
 
 namespace Extensions.Tests
@@ -19,14 +20,14 @@ namespace Extensions.Tests
         [InlineData(default, default)]
         public void EnumStringShouldResolveToEnum(TestEnum expected, string value)
         {
-            Assert.Equal(expected, value.ToEnum<TestEnum>());
+            value.ToEnum<TestEnum>().ShouldBe(expected);
         }
 
         [Fact]
         public void UnrecognizedEnumStringShouldThrowException()
         {
-            var message = Assert.Throws<ArgumentException>(() => "ValueC".ToEnum<TestEnum>()).Message;
-            Assert.Equal("Cannot parse ValueC to TestEnum", message);
+            var message = Should.Throw<ArgumentException>(() => "ValueC".ToEnum<TestEnum>()).Message;
+            message.ShouldBe("Cannot parse ValueC to TestEnum");
         }
 
         [Theory]
@@ -38,7 +39,7 @@ namespace Extensions.Tests
         [InlineData(default, default, true)]
         public void ShouldReturnIfEqualCaseInsensitive(string value1, string value2, bool expected)
         {
-            Assert.Equal(expected, value1.IsEqualTo(value2));
+            value1.IsEqualTo(value2).ShouldBe(expected);
         }
 
         [Theory]
@@ -50,7 +51,7 @@ namespace Extensions.Tests
         [InlineData(default, default, true)]
         public void ShouldReturnIfEqualCaseInsensitiveWithParam(string value1, string value2, bool expected)
         {
-            Assert.Equal(expected, value1.IsEqualTo(value2, caseSensitive: false));
+            value1.IsEqualTo(value2, caseSensitive: false).ShouldBe(expected);
         }
 
         [Theory]
@@ -62,29 +63,29 @@ namespace Extensions.Tests
         [InlineData(default, default, true)]
         public void ShouldReturnIfEqualCaseSensitive(string value1, string value2, bool expected)
         {
-            Assert.Equal(expected, value1.IsEqualTo(value2, caseSensitive: true));
+            value1.IsEqualTo(value2, caseSensitive: true).ShouldBe(expected);
         }
 
         [Fact]
         public void ShouldReturnAbsolutePathIfRelative()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Test");
-            Assert.Equal(path, "Test".Absolutize());
+            "Test".Absolutize().ShouldBe(path);
         }
 
         [Fact]
         public void ShouldReturnAbsolutePathIfAlreadyAbsolute()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Test");
-            Assert.Equal(path, path.Absolutize());
+            path.Absolutize().ShouldBe(path);
         }
 
         [Fact]
         public void AbsolutizeShouldThrowExceptionIfStringIsNull()
         {
             string test = default;
-            var message = Assert.Throws<ArgumentException>(() => test.Absolutize()).Message;
-            Assert.Equal("Cannot absolutize a null path", message);
+            var message = Should.Throw<ArgumentException>(() => test.Absolutize()).Message;
+            message.ShouldBe("Cannot absolutize a null path");
         }
 
         [Theory]
@@ -95,15 +96,15 @@ namespace Extensions.Tests
         [InlineData("MIxeDCasE", "M Ixe D Cas E")]
         public void ShouldDivideStringBasedOnCamelCase(string value, string expected)
         {
-            Assert.Equal(expected, value.FromCamelCase());
+            value.FromCamelCase().ShouldBe(expected);
         }
 
         [Fact]
         public void FromCamelCaseShouldThrowExceptionIfStartIsNegative()
         {
             string test = default;
-            var message = Assert.Throws<ArgumentException>(() => test.FromCamelCase()).Message;
-            Assert.Equal("Cannot perform FromCamelCase on a null string", message);
+            var message = Should.Throw<ArgumentException>(() => test.FromCamelCase()).Message;
+            message.ShouldBe("Cannot perform FromCamelCase on a null string");
         }
 
         [Theory]
@@ -113,7 +114,7 @@ namespace Extensions.Tests
         [InlineData(default, default, default)]
         public void ShouldReplaceStringIfReplaceIsNotNull(string value, string replace, string expected)
         {
-            Assert.Equal(expected, value.ReplaceWith(replace));
+            value.ReplaceWith(replace).ShouldBe(expected);
         }
 
         [Theory]
@@ -122,7 +123,7 @@ namespace Extensions.Tests
         [InlineData("", true)]
         public void ShouldCheckIfStringIsNullOrEmpty(string value, bool expected)
         {
-            Assert.Equal(expected, value.IsNullOrEmpty());
+            value.IsNullOrEmpty().ShouldBe(expected);
         }
 
         [Theory]
@@ -132,13 +133,13 @@ namespace Extensions.Tests
         [InlineData("", true)]
         public void ShouldCheckIfStringIsNullOrWhiteSpace(string value, bool expected)
         {
-            Assert.Equal(expected, value.IsNullOrWhiteSpace());
+            value.IsNullOrWhiteSpace().ShouldBe(expected);
         }
 
         [Fact]
         public void IsNullOrWhiteSpaceShouldReturnTrueWithStringEmpty()
         {
-            Assert.True(string.Empty.IsNullOrWhiteSpace());
+            string.Empty.IsNullOrWhiteSpace().ShouldBeTrue();
         }
 
         [Theory]
@@ -158,7 +159,7 @@ namespace Extensions.Tests
         [InlineData(" - 3.3 ", false)]
         public void ShouldCheckIfStringIsNumeric(string value, bool expected)
         {
-            Assert.Equal(expected, value.IsNumeric());
+            value.IsNumeric().ShouldBe(expected);
         }
 
         [Fact]
@@ -166,15 +167,15 @@ namespace Extensions.Tests
         {
             var source = "splitted";
             var expected = new List<string> { "s", "p", "l", "i", "t", "t", "e", "d" };
-            Assert.Equal(expected, source.SplitString());
+            source.SplitString().ShouldBe(expected);
         }
 
         [Fact]
         public void SplitStringShouldThrowExceptionIfStringIsNull()
         {
             string test = default;
-            var message = Assert.Throws<ArgumentException>(() => test.SplitString()).Message;
-            Assert.Equal("Cannot split a null string", message);
+            var message = Should.Throw<ArgumentException>(() => test.SplitString()).Message;
+            message.ShouldBe("Cannot split a null string");
         }
 
         [Theory]
@@ -184,7 +185,7 @@ namespace Extensions.Tests
         [InlineData("string", 15, "string")]
         public void ShouldThrowNoErrorsOnTolerantSubstring(string value, int startIndex, string expected)
         {
-            Assert.Equal(expected, value.TolerantSubstring(startIndex));
+            value.TolerantSubstring(startIndex).ShouldBe(expected);
         }
 
         [Theory]
@@ -196,19 +197,19 @@ namespace Extensions.Tests
         [InlineData("string", 2, 15, "ring")]
         public void ShouldThrowNoErrorsOnTolerantSubstringWithLength(string value, int startIndex, int length, string expected)
         {
-            Assert.Equal(expected, value.TolerantSubstring(startIndex, length));
+            value.TolerantSubstring(startIndex, length).ShouldBe(expected);
         }
 
         [Fact]
         public void TolerantSubstringShouldThrowExceptionIfIndexIsNegative()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(-3));
+            Should.Throw<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(-3));
         }
 
         [Fact]
         public void TolerantSubstringShouldThrowExceptionIfLengthIsNegative()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(0, -3));
+            Should.Throw<ArgumentOutOfRangeException>(() => "string".TolerantSubstring(0, -3));
         }
 
         [Theory]
@@ -216,7 +217,7 @@ namespace Extensions.Tests
         [InlineData("test diacritics èòàùçé", "test diacritics eoauce")]
         public void ShouldRemoveDiacritics(string input, string expected)
         {
-            Assert.Equal(expected, input.RemoveDiacritics());
+            input.RemoveDiacritics().ShouldBe(expected);
         }
 
         [Theory]
@@ -226,7 +227,7 @@ namespace Extensions.Tests
         [InlineData("32.1", 0)]
         public void ShouldConvertToInt32(string input, int expected)
         {
-            Assert.Equal(expected, input.ToInt32());
+            input.ToInt32().ShouldBe(expected);
         }
 
         [Theory]
@@ -236,14 +237,14 @@ namespace Extensions.Tests
         [InlineData("32,1", 32.1)]
         public void ShouldConvertToDouble(string input, double expected)
         {
-            Assert.Equal(expected, input.ToDouble());
+            input.ToDouble().ShouldBe(expected);
         }
 
         [Theory]
         [InlineData("provaprova", "oa", "prvprv")]
         public void ShouldRemoveCharFromString(string text1, string text2, string expected)
         {
-            Assert.Equal(expected, text1.Except(text2));
+            text1.Except(text2).ShouldBe(expected);
         }
 
         [Theory]
@@ -255,7 +256,7 @@ namespace Extensions.Tests
         [InlineData(default, default)]
         public void ShouldLowerFirstChar(string str, string expected)
         {
-            Assert.Equal(expected, str.LowerFirstLetter());
+            str.LowerFirstLetter().ShouldBe(expected);
         }
 
         [Theory]
@@ -263,7 +264,7 @@ namespace Extensions.Tests
         [InlineData("This is a test", 20, "This is a test")]
         public void ShouldTruncateAtWithEllipsis(string str, int charNum, string expected)
         {
-            Assert.Equal(expected, str.TruncateAt(charNum, true));
+            str.TruncateAt(charNum, true).ShouldBe(expected);
         }
 
         [Theory]
@@ -271,13 +272,13 @@ namespace Extensions.Tests
         [InlineData("This is a test", 20, "This is a test")]
         public void ShouldTruncateAtWithoutEllipsis(string str, int charNum, string expected)
         {
-            Assert.Equal(expected, str.TruncateAt(charNum));
+            str.TruncateAt(charNum).ShouldBe(expected);
         }
 
         [Fact]
         public void ShouldThrowIfTruncateAtIsNegative()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => "string".TruncateAt(-3));
+            Should.Throw<ArgumentOutOfRangeException>(() => "string".TruncateAt(-3));
         }
 
         [Fact]
@@ -292,7 +293,7 @@ namespace Extensions.Tests
             var template = "{{Name}} {{Surname}} ha detto '{{Phrase}}'";
             var expected = "Pino Cammino ha detto 'Come una catapulta!'";
 
-            Assert.Equal(expected, template.TransformTemplate(o));
+            template.TransformTemplate(o).ShouldBe(expected);
         }
 
         [Theory]
@@ -306,7 +307,7 @@ namespace Extensions.Tests
         [InlineData(default, default)]
         public void ShouldCapitalizeFirstChar(string str, string expected)
         {
-            Assert.Equal(expected, str.CapitalizeFirstLetter());
+            str.CapitalizeFirstLetter().ShouldBe(expected);
         }
 
         [Theory]
@@ -322,7 +323,7 @@ namespace Extensions.Tests
         [InlineData(default, default)]
         public void ShouldCapitalizeEachFirstLetter(string str, string expected)
         {
-            Assert.Equal(expected, str.ToTitleCase());
+            str.ToTitleCase().ShouldBe(expected);
         }
 
         [Theory]
@@ -332,7 +333,7 @@ namespace Extensions.Tests
         [InlineData(default, default)]
         public void ShouldReverseString(string str, string expected)
         {
-            Assert.Equal(expected, str.Reverse());
+            str.Reverse().ShouldBe(expected);
         }
 
         [Theory]
@@ -342,7 +343,7 @@ namespace Extensions.Tests
         [InlineData("-", 5, "-----")]
         public void ShouldRepeatString(string str, int times, string expected)
         {
-            Assert.Equal(expected, str.Repeat(times));
+            str.Repeat(times).ShouldBe(expected);
         }
 
         [Theory]
@@ -351,7 +352,7 @@ namespace Extensions.Tests
         [InlineData("_withprefix", "_", "_withprefix")]
         public void ShouldEnsureStringStartsWith(string str, string value, string expected)
         {
-            Assert.Equal(expected, str.EnsureStartsWith(value));
+            str.EnsureStartsWith(value).ShouldBe(expected);
         }
 
         [Theory]
@@ -360,7 +361,7 @@ namespace Extensions.Tests
         [InlineData("https://ildoc.dev/", "/", "https://ildoc.dev/")]
         public void ShouldEnsureStringEndsWith(string str, string value, string expected)
         {
-            Assert.Equal(expected, str.EnsureEndsWith(value));
+            str.EnsureEndsWith(value).ShouldBe(expected);
         }
     }
 }

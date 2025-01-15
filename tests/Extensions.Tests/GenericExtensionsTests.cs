@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace Extensions.Tests
@@ -12,7 +12,7 @@ namespace Extensions.Tests
         [InlineData(false, false)]
         public void BoolShouldResolveAsBool(bool value, bool expected)
         {
-            value.ToBool().Should().Be(expected);
+            value.ToBool().ShouldBe(expected);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace Extensions.Tests
         [InlineData(-7, true)]
         public void IntShouldResolveAsBool(int? value, bool expected)
         {
-            value.ToBool().Should().Be(expected);
+            value.ToBool().ShouldBe(expected);
         }
 
         [Theory]
@@ -32,7 +32,7 @@ namespace Extensions.Tests
         [InlineData("asd", false)]
         public void StringShouldResolveAsBool(string value, bool expected)
         {
-            value.ToBool().Should().Be(expected);
+            value.ToBool().ShouldBe(expected);
         }
 
         [Theory]
@@ -42,7 +42,7 @@ namespace Extensions.Tests
         [InlineData(-7f, true)]
         public void FloatShouldResolveAsBool(float? value, bool expected)
         {
-            value.ToBool().Should().Be(expected);
+            value.ToBool().ShouldBe(expected);
         }
 
         [Theory]
@@ -52,13 +52,13 @@ namespace Extensions.Tests
         [InlineData(-7.0, true)]
         public void DoubleShouldResolveAsBool(double? value, bool expected)
         {
-            value.ToBool().Should().Be(expected);
+            value.ToBool().ShouldBe(expected);
         }
 
         [Fact]
         public void ObjectShouldResolveAsTrue()
         {
-            new { Id = 7 }.ToBool().Should().BeTrue();
+            new { Id = 7 }.ToBool().ShouldBeTrue();
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace Extensions.Tests
         {
             object value = null;
 
-            value.ToBool().Should().BeFalse();
+            value.ToBool().ShouldBeFalse();
         }
 
         [Theory]
@@ -74,7 +74,7 @@ namespace Extensions.Tests
         [InlineData('f', "abcd", false)]
         public void ShouldCheckIfValueIsInString(char value, string fullString, bool expected)
         {
-            value.IsIn(fullString).Should().Be(expected);
+            value.IsIn(fullString).ShouldBe(expected);
         }
 
         [Theory]
@@ -82,7 +82,7 @@ namespace Extensions.Tests
         [InlineData('f', "abcd", true)]
         public void ShouldCheckIfValueIsNotInString(char value, string fullString, bool expected)
         {
-            value.IsNotIn(fullString).Should().Be(expected);
+            value.IsNotIn(fullString).ShouldBe(expected);
         }
 
         [Fact]
@@ -91,8 +91,8 @@ namespace Extensions.Tests
             var value = "test";
             var strings = new List<string> { "this", "is", "a", "test" };
 
-            value.IsIn(strings).Should().BeTrue();
-            value.IsNotIn(strings).Should().BeFalse();
+            value.IsIn(strings).ShouldBeTrue();
+            value.IsNotIn(strings).ShouldBeFalse();
         }
 
         [Fact]
@@ -101,8 +101,8 @@ namespace Extensions.Tests
             var value = "not";
             var strings = new List<string> { "this", "is", "a", "test" };
 
-            value.IsIn(strings).Should().BeFalse();
-            value.IsNotIn(strings).Should().BeTrue();
+            value.IsIn(strings).ShouldBeFalse();
+            value.IsNotIn(strings).ShouldBeTrue();
         }
 
         [Fact]
@@ -117,7 +117,9 @@ namespace Extensions.Tests
 
             var casted = anon.AnonymousCastTo<TestClass>();
 
-            casted.Should().BeEquivalentTo(anon);
+            casted.Id.ShouldBe(anon.Id);
+            casted.Description.ShouldBe(anon.Description);
+            casted.TimeStamp.ShouldBe(anon.TimeStamp);
         }
 
         [Fact]
@@ -132,7 +134,7 @@ namespace Extensions.Tests
 
             var b = a.Clone();
 
-            b.Should().BeEquivalentTo(a);
+            b.ShouldBeEquivalentTo(a);
         }
 
         [Theory]
@@ -143,7 +145,7 @@ namespace Extensions.Tests
         [InlineData("asd", "asd", true)]
         public void ShouldReturnEqual(object a, object b, bool expected)
         {
-            a.IsEqualTo(b).Should().Be(expected);
+            a.IsEqualTo(b).ShouldBe(expected);
         }
 
         private class TestClass
