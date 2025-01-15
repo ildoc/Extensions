@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace Extensions.Tests
@@ -16,7 +16,7 @@ namespace Extensions.Tests
             for (var i = 0; i < 100; i++)
                 dateList.Add(r.NextDatetime(new DateTime(2010, 1, 1), new DateTime(2020, 1, 1)));
 
-            dateList.Should().Contain(x => x >= new DateTime(2010, 1, 1) && x <= new DateTime(2020, 1, 1));
+            dateList.ShouldContain(x => x >= new DateTime(2010, 1, 1) && x <= new DateTime(2020, 1, 1));
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace Extensions.Tests
 
             var one = r.OneOf(list);
 
-            list.Should().Contain(one);
+            list.ShouldContain(one);
         }
     }
 }

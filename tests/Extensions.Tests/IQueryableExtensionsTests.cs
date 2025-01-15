@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Extensions.Enums;
+using Shouldly;
 using Xunit;
 
 namespace Extensions.Tests
@@ -25,7 +26,7 @@ namespace Extensions.Tests
         [InlineData(SortingOptions.Descending, "dddcccbbbaaa")]
         public void ShouldOrderBy(SortingOptions opt, string expected)
         {
-            Assert.Equal(expected, _items.OrderBy("Id", opt).Select(x => x.Name).Join(""));
+            _items.OrderBy("Id", opt).Select(x => x.Name).Join("").ShouldBe(expected);
         }
     }
 }

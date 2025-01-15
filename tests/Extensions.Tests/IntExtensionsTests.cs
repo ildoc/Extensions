@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Xunit;
 
 namespace Extensions.Tests
@@ -12,7 +12,7 @@ namespace Extensions.Tests
 
             3.Times(() => count++);
 
-            count.Should().Be(3);
+            count.ShouldBe(3);
         }
     }
 }

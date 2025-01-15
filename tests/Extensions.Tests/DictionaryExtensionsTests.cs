@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using FluentAssertions;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using Shouldly;
 using Xunit;
 
 namespace Extensions.Tests
@@ -16,42 +16,42 @@ namespace Extensions.Tests
 
             _dict.RemoveAllWithAction(x => x.Key >= 3, x => str += x.Value);
 
-            _dict.Should().HaveCount(2);
-            str.Should().Be("cccddd");
+            _dict.Count.ShouldBe(2);
+            str.ShouldBe("cccddd");
         }
 
         [Fact]
         public void ShouldRemoveItemsWhere()
         {
             _dict.RemoveAll(x => x.Key >= 3);
-            _dict.Count.Should().Be(2);
+            _dict.Count.ShouldBe(2);
         }
 
         [Fact]
         public void ShouldTryGetValueIfExists()
         {
-            _dict.GetValue(2).Should().Be("bbb");
+            _dict.GetValue(2).ShouldBe("bbb");
         }
 
         [Fact]
         public void ShouldThrowIfValueDontExists()
         {
-            var message = Assert.Throws<KeyNotFoundException>(() => _dict.GetValue(5)).Message;
-            message.Should().Be("'5' not found in Dictionary");
+            var message = Should.Throw<KeyNotFoundException>(() => _dict.GetValue(5)).Message;
+            message.ShouldBe("'5' not found in Dictionary");
         }
 
         [Fact]
         public void ShouldReturnDefaultIfValueDontExists()
         {
-            _dict.GetValueOrDefault(4).Should().Be("ddd");
-            _dict.GetValueOrDefault(5).Should().Be(default);
+            _dict.GetValueOrDefault(4).ShouldBe("ddd");
+            _dict.GetValueOrDefault(5).ShouldBe(default);
         }
 
         [Fact]
         public void ShouldSwapKeyValues()
         {
             var outputdict = new Dictionary<string, int> { { "aaa", 1 }, { "bbb", 2 }, { "ccc", 3 }, { "ddd", 4 } };
-            _dict.SwapKeyValue().Should().BeEquivalentTo(outputdict);
+            _dict.SwapKeyValue().ShouldBeEquivalentTo(outputdict);
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace Extensions.Tests
             var str = "";
             _dict.Each(x => str += x.Value);
 
-            str.Should().Be("aaabbbcccddd");
+            str.ShouldBe("aaabbbcccddd");
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace Extensions.Tests
                 new KeyValuePair<int, string>(4,"ddd"),
             };
 
-            list.ToDictionary().Should().BeEquivalentTo(_dict);
+            list.ToDictionary().ShouldBeEquivalentTo(_dict);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Shouldly;
+using Xunit;
 
 namespace Extensions.Tests
 {
@@ -10,7 +11,7 @@ namespace Extensions.Tests
         [InlineData(' ', ' ')]
         public void ShouldTransformToUppercase(char value, char expected)
         {
-            Assert.Equal(expected, value.ToUpper());
+            value.ToUpper().ShouldBe(expected);
         }
 
         [Theory]
@@ -19,7 +20,7 @@ namespace Extensions.Tests
         [InlineData(' ', ' ')]
         public void ShouldTransformToLowercase(char value, char expected)
         {
-            Assert.Equal(expected, value.ToLower());
+           value.ToLower().ShouldBe(expected);
         }
 
         [Theory]
@@ -28,7 +29,7 @@ namespace Extensions.Tests
         [InlineData(' ', false)]
         public void ShouldReturnIfIsAlphabet(char value, bool expected)
         {
-            Assert.Equal(expected, value.IsAsciiAlphabetLetter());
+            value.IsAsciiAlphabetLetter().ShouldBe(expected);
         }
     }
 }

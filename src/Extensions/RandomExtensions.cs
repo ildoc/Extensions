@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace Extensions
 {
@@ -10,9 +12,9 @@ namespace Extensions
         public static DateTime NextDatetime(this Random random, in DateTime from, in DateTime to) =>
              from + new TimeSpan((long)(random.NextDouble() * (to - from).Ticks));
 
-        public static T OneOf<T>(this Random random, params T[] values)
+        public static T OneOf<T>(this Random random, IEnumerable<T> values)
         {
-            return values[random.Next(values.Length)];
+            return values.ElementAt(random.Next(values.Count()));
         }
 
         public static string NextHexColor(this Random random)
